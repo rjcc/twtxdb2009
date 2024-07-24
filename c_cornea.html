@@ -1,0 +1,96 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <span class=result>&lt;unnamed&gt;</span>
+<span class=result>       </span>log:  <span class=result>/Users/apple/Documents/rjcc2/txdb2009/c_cornea.smcl</span>
+<span class=result>  </span>log type:  <span class=result>smcl</span>
+<span class=result> </span>opened on:  <span class=result>25 Dec 2009, 14:24:41</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables:</span>
+<span class=input>. *   Candidates</span>
+<span class=input>. *     y  contra_vision only_vision</span>
+<span class=input>. tabstat write_date, stat(min max) format(%dCY-N-D) col(var)</span>
+<br><br>
+   stats |  write_~e
+---------+----------
+     min |<span class=result>2007-07-13</span>
+     max |<span class=result>2009-10-28</span>
+--------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. label values contra_vision only_vision yn</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. misstable summarize _all</span>
+(variables nonmissing or string)
+<br><br>
+<span class=input>. </span>
+<span class=input>. tab contra_vision y, missing col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+contra_vis |                y
+       ion |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>       373        558        716 </span>|<span class=result>     1,647 </span>
+<span class=result>           </span>|<span class=result>     43.32      49.03      69.25 </span>|<span class=result>     54.30 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>       488        580        318 </span>|<span class=result>     1,386 </span>
+<span class=result>           </span>|<span class=result>     56.68      50.97      30.75 </span>|<span class=result>     45.70 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       861      1,138      1,034 </span>|<span class=result>     3,033 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab only_vision y, missing col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+only_visio |                y
+         n |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>       424        569        489 </span>|<span class=result>     1,482 </span>
+<span class=result>           </span>|<span class=result>     49.25      50.00      47.29 </span>|<span class=result>     48.86 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>       437        569        545 </span>|<span class=result>     1,551 </span>
+<span class=result>           </span>|<span class=result>     50.75      50.00      52.71 </span>|<span class=result>     51.14 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       861      1,138      1,034 </span>|<span class=result>     3,033 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. log close</span>
+<span class=result>      </span>name:  <span class=result>&lt;unnamed&gt;</span>
+<span class=result>       </span>log:  <span class=result>/Users/apple/Documents/rjcc2/txdb2009/c_cornea.smcl</span>
+<span class=result>  </span>log type:  <span class=result>smcl</span>
+<span class=result> </span>closed on:  <span class=result>25 Dec 2009, 14:24:41</span>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</pre>
+</body>
+</html>

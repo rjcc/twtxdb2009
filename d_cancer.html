@@ -1,0 +1,460 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. </span>
+<span class=input>. bysort organ_code: tab cancer y if y&gt;=2004, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    cancer |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>         0          3          1          2          2          3 </span>|<span class=result>        11 </span>
+<span class=result>           </span>|<span class=result>      0.00       3.45       1.41       2.74       2.38       4.05 </span>|<span class=result>      2.59 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>        36         84         70         71         82         71 </span>|<span class=result>       414 </span>
+<span class=result>           </span>|<span class=result>    100.00      96.55      98.59      97.26      97.62      95.95 </span>|<span class=result>     97.41 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        36         87         71         73         84         74 </span>|<span class=result>       425 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    cancer |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>         0          1          1          2          4          2 </span>|<span class=result>        10 </span>
+<span class=result>           </span>|<span class=result>      0.00       1.15       1.43       2.70       4.76       2.67 </span>|<span class=result>      2.38 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>        31         86         69         72         80         73 </span>|<span class=result>       411 </span>
+<span class=result>           </span>|<span class=result>    100.00      98.85      98.57      97.30      95.24      97.33 </span>|<span class=result>     97.62 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        31         87         70         74         84         75 </span>|<span class=result>       421 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    cancer |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>         0          4          2          4          8          4 </span>|<span class=result>        22 </span>
+<span class=result>           </span>|<span class=result>      0.00       1.80       1.01       2.29       4.00       2.12 </span>|<span class=result>      2.05 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>        90        218        196        171        192        185 </span>|<span class=result>     1,052 </span>
+<span class=result>           </span>|<span class=result>    100.00      98.20      98.99      97.71      96.00      97.88 </span>|<span class=result>     97.95 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        90        222        198        175        200        189 </span>|<span class=result>     1,074 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    cancer |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         5         10         10          7          6          4 </span>|<span class=result>        42 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5         10         10          7          6          4 </span>|<span class=result>        42 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    cancer |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>         0          2          0          0          0          0 </span>|<span class=result>         2 </span>
+<span class=result>           </span>|<span class=result>      0.00      28.57       0.00       0.00       0.00       0.00 </span>|<span class=result>      3.85 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         5          5          4          9         17         10 </span>|<span class=result>        50 </span>
+<span class=result>           </span>|<span class=result>    100.00      71.43     100.00     100.00     100.00     100.00 </span>|<span class=result>     96.15 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5          7          4          9         17         10 </span>|<span class=result>        52 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    cancer |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>        10         24         13         24         56         51 </span>|<span class=result>       178 </span>
+<span class=result>           </span>|<span class=result>     12.35      13.48       6.16      12.50      21.29      21.43 </span>|<span class=result>     15.31 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>        71        154        198        168        207        187 </span>|<span class=result>       985 </span>
+<span class=result>           </span>|<span class=result>     87.65      86.52      93.84      87.50      78.71      78.57 </span>|<span class=result>     84.69 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        81        178        211        192        263        238 </span>|<span class=result>     1,163 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. bysort organ_code: list cancer_desc if cancer==0 &amp; trim(cancer_desc)!="" &amp; y&gt;=2004, table</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+     +-----------------------------------------------------------------------------------+
+     | <span class=result>                                                                      cancer_desc </span>|
+     |-----------------------------------------------------------------------------------|
+ 87. | <span class=result>                                                                     頭部腫瘤 </span>|
+114. | <span class=result>                                                                              HCC </span>|
+138. | <span class=result>                                                                 Cervical ca 0期 </span>|
+205. | <span class=result>                                                                      brain tumor </span>|
+228. | <span class=result>                                                           良性腦瘤術後(92) </span>|
+     |-----------------------------------------------------------------------------------|
+287. | <span class=result>                                                                           腦瘤 </span>|
+350. | <span class=result>                                                                      brain tumor </span>|
+369. | <span class=result>                                                      1991- Breast cancer R't s/p </span>|
+395. | <span class=result>Glioblastoma multiforme, brain, cerebrum, frontal lobe, bilateral s/p craniotomy  </span>|
+436. | <span class=result>                                                                  腦惡性腫瘤 </span>|
+     |-----------------------------------------------------------------------------------|
+438. | <span class=result>                                                                           腦瘤 </span>|
+     +-----------------------------------------------------------------------------------+
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+     +-----------------------------+
+     | <span class=result>                cancer_desc </span>|
+     |-----------------------------|
+ 76. | <span class=result>               頭部腫瘤 </span>|
+194. | <span class=result>                brain tumor </span>|
+221. | <span class=result>     良性腦瘤術後(92) </span>|
+277. | <span class=result>                     腦瘤 </span>|
+301. | <span class=result>                        腦 </span>|
+     |-----------------------------|
+311. | <span class=result>                     腦瘤 </span>|
+344. | <span class=result>    17年前罹患鼻咽癌 </span>|
+362. | <span class=result>1991- Breast cancer R't s/p </span>|
+426. | <span class=result>            腦惡性腫瘤 </span>|
+428. | <span class=result>                     腦瘤 </span>|
+     +-----------------------------+
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+      +-----------------------------------------------------------------------------------+
+      | <span class=result>                                                                      cancer_desc </span>|
+      |-----------------------------------------------------------------------------------|
+ 211. | <span class=result>                                                                     頭部腫瘤 </span>|
+ 212. | <span class=result>                                                                     頭部腫瘤 </span>|
+ 337. | <span class=result>                                                                 Cervical ca 0期 </span>|
+ 338. | <span class=result>                                                                 Cervical ca 0期 </span>|
+ 528. | <span class=result>                                                                      brain tumor </span>|
+      |-----------------------------------------------------------------------------------|
+ 529. | <span class=result>                                                                      brain tumor </span>|
+ 582. | <span class=result>                                                           良性腦瘤術後(92) </span>|
+ 583. | <span class=result>                                                           良性腦瘤術後(92) </span>|
+ 721. | <span class=result>                                                                           腦瘤 </span>|
+ 722. | <span class=result>                                                                           腦瘤 </span>|
+      |-----------------------------------------------------------------------------------|
+ 794. | <span class=result>                                                                              腦 </span>|
+ 795. | <span class=result>                                                                              腦 </span>|
+ 820. | <span class=result>                                                                           腦瘤 </span>|
+ 821. | <span class=result>                                                                           腦瘤 </span>|
+ 886. | <span class=result>                                                          17年前罹患鼻咽癌 </span>|
+      |-----------------------------------------------------------------------------------|
+ 887. | <span class=result>                                                          17年前罹患鼻咽癌 </span>|
+ 925. | <span class=result>                                                      1991- Breast cancer R't s/p </span>|
+ 926. | <span class=result>                                                      1991- Breast cancer R't s/p </span>|
+ 991. | <span class=result>Glioblastoma multiforme, brain, cerebrum, frontal lobe, bilateral s/p craniotomy  </span>|
+ 992. | <span class=result>Glioblastoma multiforme, brain, cerebrum, frontal lobe, bilateral s/p craniotomy  </span>|
+      |-----------------------------------------------------------------------------------|
+1092. | <span class=result>                                                                           腦瘤 </span>|
+1093. | <span class=result>                                                                           腦瘤 </span>|
+      +-----------------------------------------------------------------------------------+
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+      +--------------+
+      | <span class=result> cancer_desc </span>|
+      |--------------|
+   9. | <span class=result>頭部腫瘤 </span>|
+  12. | <span class=result>         HCC </span>|
+      +--------------+
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+      +--------------------------------------------------------+
+      | <span class=result>                                           cancer_desc </span>|
+      |--------------------------------------------------------|
+  33. | <span class=result>                                             食道癌 </span>|
+  34. | <span class=result>                                             食道癌 </span>|
+  45. | <span class=result>                                                肺癌 </span>|
+  46. | <span class=result>                                                肺癌 </span>|
+ 130. | <span class=result>        Malignant neufibromatosis and neurogenic tumor </span>|
+      |--------------------------------------------------------|
+ 131. | <span class=result>        Malignant neufibromatosis and neurogenic tumor </span>|
+ 148. | <span class=result>CA OF ESOPAHGUS S/P GASTROSTOMY AND FEEDING JEJUNSTOMY </span>|
+ 149. | <span class=result>CA OF ESOPAHGUS S/P GASTROSTOMY AND FEEDING JEJUNSTOMY </span>|
+ 156. | <span class=result>                            ESOPHAGUS, MALIGNANT TUMOR </span>|
+ 157. | <span class=result>                            ESOPHAGUS, MALIGNANT TUMOR </span>|
+      |--------------------------------------------------------|
+ 164. | <span class=result>                                          頭部腫瘤 </span>|
+ 165. | <span class=result>                                          頭部腫瘤 </span>|
+ 199. | <span class=result>                              支氣管及惡性腫瘤 </span>|
+ 200. | <span class=result>                              支氣管及惡性腫瘤 </span>|
+ 231. | <span class=result>                                             膽管癌 </span>|
+      |--------------------------------------------------------|
+ 232. | <span class=result>                                             膽管癌 </span>|
+ 233. | <span class=result>                                                   CML </span>|
+ 234. | <span class=result>                                                   CML </span>|
+ 241. | <span class=result>                                           Brain Tumor </span>|
+ 242. | <span class=result>                                           Brain Tumor </span>|
+      |--------------------------------------------------------|
+ 337. | <span class=result>                                             大腸癌 </span>|
+ 338. | <span class=result>                                             大腸癌 </span>|
+ 341. | <span class=result>                                          子宮頸癌 </span>|
+ 443. | <span class=result>                                              Lymphoma </span>|
+ 444. | <span class=result>                                              Lymphoma </span>|
+      |--------------------------------------------------------|
+ 455. | <span class=result>                                                  GIST </span>|
+ 456. | <span class=result>                                                  GIST </span>|
+ 465. | <span class=result>                                           lung cancer </span>|
+ 466. | <span class=result>                                           lung cancer </span>|
+ 467. | <span class=result>                                       cervical cancer </span>|
+      |--------------------------------------------------------|
+ 468. | <span class=result>                                       cervical cancer </span>|
+ 469. | <span class=result>                                           brain tumor </span>|
+ 470. | <span class=result>                                           brain tumor </span>|
+ 483. | <span class=result>                                         Breast Cancer </span>|
+ 484. | <span class=result>                                         Breast Cancer </span>|
+      |--------------------------------------------------------|
+ 503. | <span class=result>                                          胃癌末期 </span>|
+ 504. | <span class=result>                                          胃癌末期 </span>|
+ 509. | <span class=result>                                           BRAIN TUMOR </span>|
+ 510. | <span class=result>                                           BRAIN TUMOR </span>|
+ 529. | <span class=result>                                                   HCC </span>|
+      |--------------------------------------------------------|
+ 530. | <span class=result>                                                   HCC </span>|
+ 535. | <span class=result>                                             大腸癌 </span>|
+ 536. | <span class=result>                                             大腸癌 </span>|
+ 545. | <span class=result>                                          肺癌末期 </span>|
+ 546. | <span class=result>                                          肺癌末期 </span>|
+      |--------------------------------------------------------|
+ 555. | <span class=result>                                 splenic angiosarcoma  </span>|
+ 556. | <span class=result>                                 splenic angiosarcoma  </span>|
+ 625. | <span class=result>                                             BREAST CA </span>|
+ 626. | <span class=result>                                             BREAST CA </span>|
+ 645. | <span class=result>                                           Oral cancer </span>|
+      |--------------------------------------------------------|
+ 646. | <span class=result>                        下肢皮膚惡性黑性素瘤 </span>|
+ 647. | <span class=result>                        下肢皮膚惡性黑性素瘤 </span>|
+ 648. | <span class=result>                                           Oral cancer </span>|
+ 649. | <span class=result>                                         Tongne cancer </span>|
+ 654. | <span class=result>                                 hypopharyngeal cancer </span>|
+      |--------------------------------------------------------|
+ 655. | <span class=result>               Malignant peripheral nerve sheath tumor </span>|
+ 656. | <span class=result>               Malignant peripheral nerve sheath tumor </span>|
+ 690. | <span class=result>                                                乳癌 </span>|
+ 691. | <span class=result>                                                乳癌 </span>|
+ 717. | <span class=result>                                             直腸癌 </span>|
+      |--------------------------------------------------------|
+ 718. | <span class=result>                                             直腸癌 </span>|
+ 719. | <span class=result>                                             食道癌 </span>|
+ 720. | <span class=result>                                             食道癌 </span>|
+ 744. | <span class=result>                                             breast ca </span>|
+ 745. | <span class=result>                                             breast ca </span>|
+      |--------------------------------------------------------|
+ 746. | <span class=result>                                             大腸癌 </span>|
+ 747. | <span class=result>                                             大腸癌 </span>|
+ 748. | <span class=result>                                    胰臟癌肝轉移 </span>|
+ 749. | <span class=result>                                    胰臟癌肝轉移 </span>|
+ 777. | <span class=result>                                    子宮平滑肌瘤 </span>|
+      |--------------------------------------------------------|
+ 782. | <span class=result>                        MALIGNANT TUMOR OF HYPOPHARYNX </span>|
+ 783. | <span class=result>                        MALIGNANT TUMOR OF HYPOPHARYNX </span>|
+ 784. | <span class=result>                             子宮內膜癌.卵巢癌 </span>|
+ 785. | <span class=result>                             子宮內膜癌.卵巢癌 </span>|
+ 788. | <span class=result>                                                  HCC. </span>|
+      |--------------------------------------------------------|
+ 789. | <span class=result>                                                  HCC. </span>|
+ 793. | <span class=result>                                          colon cancer </span>|
+ 798. | <span class=result>                                                   HCC </span>|
+ 799. | <span class=result>                                                   HCC </span>|
+ 808. | <span class=result>                                                   HCC </span>|
+      |--------------------------------------------------------|
+ 817. | <span class=result>                                                腦瘤 </span>|
+ 821. | <span class=result>                      adenocarcinoma of lung, lymphoma </span>|
+ 822. | <span class=result>                      adenocarcinoma of lung, lymphoma </span>|
+ 826. | <span class=result>                                                胃癌 </span>|
+ 827. | <span class=result>                                                胃癌 </span>|
+      |--------------------------------------------------------|
+ 834. | <span class=result>                                     MULTIPLE  MYELOMA </span>|
+ 835. | <span class=result>                                     MULTIPLE  MYELOMA </span>|
+ 838. | <span class=result>                                          腸癌轉移 </span>|
+ 839. | <span class=result>                                          腸癌轉移 </span>|
+ 858. | <span class=result>                                           Oral cancer </span>|
+      |--------------------------------------------------------|
+ 859. | <span class=result>                                                腸癌 </span>|
+ 860. | <span class=result>                                                腸癌 </span>|
+ 861. | <span class=result>                                         Breast cancer </span>|
+ 862. | <span class=result>                                         Breast cancer </span>|
+ 869. | <span class=result>                                             口腔癌 </span>|
+      |--------------------------------------------------------|
+ 873. | <span class=result>                                              COLON CA </span>|
+ 874. | <span class=result>                                             膽管癌 </span>|
+ 875. | <span class=result>                                             膽管癌 </span>|
+ 888. | <span class=result>                                     tongue SCC T4N1M0 </span>|
+ 893. | <span class=result>                                                   HCC </span>|
+      |--------------------------------------------------------|
+ 894. | <span class=result>                                                   HCC </span>|
+ 901. | <span class=result>                                           brain tumor </span>|
+ 902. | <span class=result>                                           brain tumor </span>|
+ 909. | <span class=result>                                                   HCC </span>|
+ 910. | <span class=result>                                                   HCC </span>|
+      |--------------------------------------------------------|
+ 913. | <span class=result>                                    腦部惡性腫瘤 </span>|
+ 916. | <span class=result>                        pancreatic head adenocarcinoma </span>|
+ 917. | <span class=result>                        pancreatic head adenocarcinoma </span>|
+ 932. | <span class=result>                                                肺癌 </span>|
+ 933. | <span class=result>                                                肺癌 </span>|
+      |--------------------------------------------------------|
+ 940. | <span class=result>                                                肺癌 </span>|
+ 941. | <span class=result>                                                肺癌 </span>|
+ 948. | <span class=result>                                                   HCC </span>|
+ 957. | <span class=result>                                          子宮頸癌 </span>|
+ 958. | <span class=result>                                          子宮頸癌 </span>|
+      |--------------------------------------------------------|
+ 961. | <span class=result>                                                肝癌 </span>|
+ 962. | <span class=result>                                                肝癌 </span>|
+ 977. | <span class=result>                    Breast cancer with liver,bone meta </span>|
+ 978. | <span class=result>                                           BRAIN TUMOR </span>|
+ 979. | <span class=result>                                           BRAIN TUMOR </span>|
+      |--------------------------------------------------------|
+ 980. | <span class=result>                    Breast cancer with liver,bone meta </span>|
+ 983. | <span class=result>                                                   RCC </span>|
+ 984. | <span class=result>                                                   RCC </span>|
+ 998. | <span class=result>                                                胃癌 </span>|
+ 999. | <span class=result>                                                胃癌 </span>|
+      |--------------------------------------------------------|
+1022. | <span class=result>                                           Gastric ca. </span>|
+1023. | <span class=result>                                           Gastric ca. </span>|
+1026. | <span class=result>                                             胰臟癌 </span>|
+1027. | <span class=result>                                             胰臟癌 </span>|
+1039. | <span class=result>                                             口腔癌 </span>|
+      |--------------------------------------------------------|
+1040. | <span class=result>                                             口腔癌 </span>|
+1041. | <span class=result>                             cervical cancer with meya </span>|
+1042. | <span class=result>                             cervical cancer with meya </span>|
+1054. | <span class=result>                                            GASTRIC CA </span>|
+1061. | <span class=result>                                                乳癌 </span>|
+      |--------------------------------------------------------|
+1062. | <span class=result>                                                乳癌 </span>|
+1063. | <span class=result>                                          乳癌轉移 </span>|
+1064. | <span class=result>                                          乳癌轉移 </span>|
+1092. | <span class=result>                           Malignant neoplasm of uvula </span>|
+1093. | <span class=result>                           Malignant neoplasm of uvula </span>|
+      |--------------------------------------------------------|
+1107. | <span class=result>                             Colon Ca. with liver meta </span>|
+1108. | <span class=result>                             Colon Ca. with liver meta </span>|
+1114. | <span class=result>                                             下咽癌 </span>|
+1115. | <span class=result>                                             下咽癌 </span>|
+1116. | <span class=result>                                                乳癌 </span>|
+      |--------------------------------------------------------|
+1117. | <span class=result>                                                乳癌 </span>|
+1120. | <span class=result>                           Malignant neoplasm of ovary </span>|
+1121. | <span class=result>                           Malignant neoplasm of ovary </span>|
+1126. | <span class=result>                        HCC S/P LIVER TRANSPLANTATION  </span>|
+1127. | <span class=result>                        HCC S/P LIVER TRANSPLANTATION  </span>|
+      |--------------------------------------------------------|
+1128. | <span class=result>                                                舌癌 </span>|
+1129. | <span class=result>                                                舌癌 </span>|
+1132. | <span class=result>                                       乙狀結腸癌 </span>|
+1133. | <span class=result>                                       乙狀結腸癌 </span>|
+1142. | <span class=result>                                             下咽癌 </span>|
+      |--------------------------------------------------------|
+1143. | <span class=result>                                             下咽癌 </span>|
+1144. | <span class=result>                                                乳癌 </span>|
+1145. | <span class=result>                                                乳癌 </span>|
+1156. | <span class=result>                                       腦惡性腫瘤 </span>|
+1157. | <span class=result>                                       腦惡性腫瘤 </span>|
+      |--------------------------------------------------------|
+1158. | <span class=result>                                         Uvular cancer </span>|
+1159. | <span class=result>                                         Uvular cancer </span>|
+1162. | <span class=result>                                                肝癌 </span>|
+1163. | <span class=result>                                                肝癌 </span>|
+1168. | <span class=result>                                          惡性腦瘤 </span>|
+      |--------------------------------------------------------|
+1169. | <span class=result>                                          惡性腦瘤 </span>|
+1187. | <span class=result>                                             食道癌 </span>|
+1188. | <span class=result>                                             食道癌 </span>|
+      +--------------------------------------------------------+
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

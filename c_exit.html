@@ -1,0 +1,478 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables:</span>
+<span class=input>. *   Candidates</span>
+<span class=input>. *     y organ exit reason</span>
+<span class=input>. drop if y&lt;2004</span>
+(111 observations deleted)
+<br><br>
+<span class=input>. tabstat write_date, stat(min max) format(%dCY-N-D) col(var)</span>
+<br><br>
+   stats |  write_~e
+---------+----------
+     min |<span class=result>2004-01-02</span>
+     max |<span class=result>2009-10-28</span>
+--------------------
+<br><br>
+<span class=input>. misstable summarize _all</span>
+                                                               Obs&lt;.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs&gt;.     Obs&lt;.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+        reason |<span class=result>    10,215</span>          <span class=result>    11,067</span>  |      6          1           6
+  -----------------------------------------------------------------------------
+<br><br>
+<span class=input>. tab organ_code y</span>
+<br><br>
+<span class=result>           </span>|                                 y
+organ_code |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+     Heart |<span class=result>       240        176        190        207        215        230 </span>|<span class=result>     1,258 </span>
+     Liver |<span class=result>       484        594        742        851        959      1,068 </span>|<span class=result>     4,698 </span>
+    Kidney |<span class=result>     2,033      1,419      3,149      2,185      1,923      2,524 </span>|<span class=result>    13,233 </span>
+      Lung |<span class=result>        17         24         40         31         40         28 </span>|<span class=result>       180 </span>
+  Pancreas |<span class=result>         0          0          0          0         48         35 </span>|<span class=result>        83 </span>
+    Cornea |<span class=result>         0          0          0        190        737        903 </span>|<span class=result>     1,830 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>     2,774      2,213      4,121      3,464      3,922      4,788 </span>|<span class=result>    21,282 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. tab organ_code y if exit==1</span>
+<br><br>
+<span class=result>           </span>|                                 y
+organ_code |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+     Heart |<span class=result>        10         37         42         48         55         91 </span>|<span class=result>       283 </span>
+     Liver |<span class=result>        42         56        224        275        345        566 </span>|<span class=result>     1,508 </span>
+    Kidney |<span class=result>       557        670      2,311      1,027      1,205      1,888 </span>|<span class=result>     7,658 </span>
+      Lung |<span class=result>         7          0         14         14         17         12 </span>|<span class=result>        64 </span>
+  Pancreas |<span class=result>         0          0          0          0         39         22 </span>|<span class=result>        61 </span>
+    Cornea |<span class=result>         0          0          0        110        164        363 </span>|<span class=result>       637 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>       616        763      2,591      1,474      1,825      2,942 </span>|<span class=result>    10,211 </span>
+<br><br>
+<br><br>
+<span class=input>. table exit y, col row by(organ_code) scol</span>
+<br><br>
+------------------------------------------------------------------
+organ_cod |
+e and     |                           y                           
+exit      |   2004    2005    2006    2007    2008    2009   Total
+----------+-------------------------------------------------------
+Heart     |
+        Y |    <span class=result>230     139     148     159     160     139     975</span>
+<span class=result>        </span>N |     <span class=result>10      37      42      48      55      91     283</span>
+<span class=result>          </span>| 
+    Total |    <span class=result>240     176     190     207     215     230   1,258</span>
+----------+-------------------------------------------------------
+Liver     |
+        Y |    <span class=result>442     538     518     576     614     502   3,190</span>
+<span class=result>        </span>N |     <span class=result>42      56     224     275     345     566   1,508</span>
+<span class=result>          </span>| 
+    Total |    <span class=result>484     594     742     851     959   1,068   4,698</span>
+----------+-------------------------------------------------------
+Kidney    |
+        Y |  <span class=result>1,476     749     838   1,158     718     636   5,575</span>
+<span class=result>        </span>N |    <span class=result>557     670   2,311   1,027   1,205   1,888   7,658</span>
+<span class=result>          </span>| 
+    Total |  <span class=result>2,033   1,419   3,149   2,185   1,923   2,524  13,233</span>
+----------+-------------------------------------------------------
+Lung      |
+        Y |     <span class=result>10      24      26      17      23      16     116</span>
+<span class=result>        </span>N |      <span class=result>7              14      14      17      12      64</span>
+<span class=result>          </span>| 
+    Total |     <span class=result>17      24      40      31      40      28     180</span>
+----------+-------------------------------------------------------
+Pancreas  |
+        Y |       <span class=result>                               9      13      22</span>
+<span class=result>        </span>N |       <span class=result>                              39      22      61</span>
+<span class=result>          </span>| 
+    Total |       <span class=result>                              48      35      83</span>
+----------+-------------------------------------------------------
+Cornea    |
+        Y |       <span class=result>                      80     573     540   1,193</span>
+<span class=result>        </span>N |       <span class=result>                     110     164     363     637</span>
+<span class=result>          </span>| 
+    Total |       <span class=result>                     190     737     903   1,830</span>
+------------------------------------------------------------------
+<br><br>
+<span class=input>. table exit y, col row scol</span>
+<br><br>
+------------------------------------------------------------------
+          |                           y                           
+     exit |   2004    2005    2006    2007    2008    2009   Total
+----------+-------------------------------------------------------
+        Y |  <span class=result>2,158   1,450   1,530   1,990   2,097   1,846  11,071</span>
+<span class=result>        </span>N |    <span class=result>616     763   2,591   1,474   1,825   2,942  10,211</span>
+<span class=result>          </span>| 
+    Total |  <span class=result>2,774   2,213   4,121   3,464   3,922   4,788  21,282</span>
+------------------------------------------------------------------
+<br><br>
+<span class=input>. bysort organ_code: tab exit y, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+      exit |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>       230        139        148        159        160        139 </span>|<span class=result>       975 </span>
+<span class=result>           </span>|<span class=result>     95.83      78.98      77.89      76.81      74.42      60.43 </span>|<span class=result>     77.50 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>        10         37         42         48         55         91 </span>|<span class=result>       283 </span>
+<span class=result>           </span>|<span class=result>      4.17      21.02      22.11      23.19      25.58      39.57 </span>|<span class=result>     22.50 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>       240        176        190        207        215        230 </span>|<span class=result>     1,258 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+      exit |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>       442        538        518        576        614        502 </span>|<span class=result>     3,190 </span>
+<span class=result>           </span>|<span class=result>     91.32      90.57      69.81      67.69      64.03      47.00 </span>|<span class=result>     67.90 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>        42         56        224        275        345        566 </span>|<span class=result>     1,508 </span>
+<span class=result>           </span>|<span class=result>      8.68       9.43      30.19      32.31      35.97      53.00 </span>|<span class=result>     32.10 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>       484        594        742        851        959      1,068 </span>|<span class=result>     4,698 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+      exit |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>     1,476        749        838      1,158        718        636 </span>|<span class=result>     5,575 </span>
+<span class=result>           </span>|<span class=result>     72.60      52.78      26.61      53.00      37.34      25.20 </span>|<span class=result>     42.13 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>       557        670      2,311      1,027      1,205      1,888 </span>|<span class=result>     7,658 </span>
+<span class=result>           </span>|<span class=result>     27.40      47.22      73.39      47.00      62.66      74.80 </span>|<span class=result>     57.87 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>     2,033      1,419      3,149      2,185      1,923      2,524 </span>|<span class=result>    13,233 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+      exit |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>        10         24         26         17         23         16 </span>|<span class=result>       116 </span>
+<span class=result>           </span>|<span class=result>     58.82     100.00      65.00      54.84      57.50      57.14 </span>|<span class=result>     64.44 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         7          0         14         14         17         12 </span>|<span class=result>        64 </span>
+<span class=result>           </span>|<span class=result>     41.18       0.00      35.00      45.16      42.50      42.86 </span>|<span class=result>     35.56 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        17         24         40         31         40         28 </span>|<span class=result>       180 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |           y
+      exit |      2008       2009 |     Total
+-----------+----------------------+----------
+         Y |<span class=result>         9         13 </span>|<span class=result>        22 </span>
+<span class=result>           </span>|<span class=result>     18.75      37.14 </span>|<span class=result>     26.51 </span>
+-----------+----------------------+----------
+         N |<span class=result>        39         22 </span>|<span class=result>        61 </span>
+<span class=result>           </span>|<span class=result>     81.25      62.86 </span>|<span class=result>     73.49 </span>
+-----------+----------------------+----------
+     Total |<span class=result>        48         35 </span>|<span class=result>        83 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                y
+      exit |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>        80        573        540 </span>|<span class=result>     1,193 </span>
+<span class=result>           </span>|<span class=result>     42.11      77.75      59.80 </span>|<span class=result>     65.19 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>       110        164        363 </span>|<span class=result>       637 </span>
+<span class=result>           </span>|<span class=result>     57.89      22.25      40.20 </span>|<span class=result>     34.81 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       190        737        903 </span>|<span class=result>     1,830 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. bysort organ_code: tab reason y if exit==0, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    reason |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+      Dead |<span class=result>        26         48         49         66         45         46 </span>|<span class=result>       280 </span>
+<span class=result>           </span>|<span class=result>     11.35      34.53      33.11      41.51      28.12      33.09 </span>|<span class=result>     28.75 </span>
+-----------+------------------------------------------------------------------+----------
+   Loss FU |<span class=result>         0          1          4          1          1          4 </span>|<span class=result>        11 </span>
+<span class=result>           </span>|<span class=result>      0.00       0.72       2.70       0.63       0.62       2.88 </span>|<span class=result>      1.13 </span>
+-----------+------------------------------------------------------------------+----------
+Transplant |<span class=result>       199         84         68         75         81         76 </span>|<span class=result>       583 </span>
+<span class=result>           </span>|<span class=result>     86.90      60.43      45.95      47.17      50.62      54.68 </span>|<span class=result>     59.86 </span>
+-----------+------------------------------------------------------------------+----------
+Pt-Refusal |<span class=result>         3          1          1          3          6          2 </span>|<span class=result>        16 </span>
+<span class=result>           </span>|<span class=result>      1.31       0.72       0.68       1.89       3.75       1.44 </span>|<span class=result>      1.64 </span>
+-----------+------------------------------------------------------------------+----------
+       C/I |<span class=result>         0          1         20          7         17         10 </span>|<span class=result>        55 </span>
+<span class=result>           </span>|<span class=result>      0.00       0.72      13.51       4.40      10.62       7.19 </span>|<span class=result>      5.65 </span>
+-----------+------------------------------------------------------------------+----------
+    Others |<span class=result>         1          4          6          7         10          1 </span>|<span class=result>        29 </span>
+<span class=result>           </span>|<span class=result>      0.44       2.88       4.05       4.40       6.25       0.72 </span>|<span class=result>      2.98 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>       229        139        148        159        160        139 </span>|<span class=result>       974 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    reason |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+      Dead |<span class=result>        57        188        276        191        223        190 </span>|<span class=result>     1,125 </span>
+<span class=result>           </span>|<span class=result>     12.93      34.94      53.28      33.16      36.32      37.85 </span>|<span class=result>     35.28 </span>
+-----------+------------------------------------------------------------------+----------
+   Loss FU |<span class=result>         3         28          5         20         45         29 </span>|<span class=result>       130 </span>
+<span class=result>           </span>|<span class=result>      0.68       5.20       0.97       3.47       7.33       5.78 </span>|<span class=result>      4.08 </span>
+-----------+------------------------------------------------------------------+----------
+Transplant |<span class=result>       366        278        213        301        279        221 </span>|<span class=result>     1,658 </span>
+<span class=result>           </span>|<span class=result>     82.99      51.67      41.12      52.26      45.44      44.02 </span>|<span class=result>     51.99 </span>
+-----------+------------------------------------------------------------------+----------
+Pt-Refusal |<span class=result>         4         10          6         11         12         10 </span>|<span class=result>        53 </span>
+<span class=result>           </span>|<span class=result>      0.91       1.86       1.16       1.91       1.95       1.99 </span>|<span class=result>      1.66 </span>
+-----------+------------------------------------------------------------------+----------
+       C/I |<span class=result>         3         29         13         30         36         38 </span>|<span class=result>       149 </span>
+<span class=result>           </span>|<span class=result>      0.68       5.39       2.51       5.21       5.86       7.57 </span>|<span class=result>      4.67 </span>
+-----------+------------------------------------------------------------------+----------
+    Others |<span class=result>         8          5          5         23         19         14 </span>|<span class=result>        74 </span>
+<span class=result>           </span>|<span class=result>      1.81       0.93       0.97       3.99       3.09       2.79 </span>|<span class=result>      2.32 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>       441        538        518        576        614        502 </span>|<span class=result>     3,189 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    reason |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+      Dead |<span class=result>        17         40        328         72         81         45 </span>|<span class=result>       583 </span>
+<span class=result>           </span>|<span class=result>      1.15       5.35      39.14       6.22      11.28       7.08 </span>|<span class=result>     10.46 </span>
+-----------+------------------------------------------------------------------+----------
+   Loss FU |<span class=result>        48         21         61        401        119        233 </span>|<span class=result>       883 </span>
+<span class=result>           </span>|<span class=result>      3.25       2.81       7.28      34.63      16.57      36.64 </span>|<span class=result>     15.84 </span>
+-----------+------------------------------------------------------------------+----------
+Transplant |<span class=result>     1,371        620        371        504        334        289 </span>|<span class=result>     3,489 </span>
+<span class=result>           </span>|<span class=result>     92.89      83.00      44.27      43.52      46.52      45.44 </span>|<span class=result>     62.61 </span>
+-----------+------------------------------------------------------------------+----------
+Pt-Refusal |<span class=result>        26         36         30        109        126         30 </span>|<span class=result>       357 </span>
+<span class=result>           </span>|<span class=result>      1.76       4.82       3.58       9.41      17.55       4.72 </span>|<span class=result>      6.41 </span>
+-----------+------------------------------------------------------------------+----------
+       C/I |<span class=result>         1         11         10         41         36         32 </span>|<span class=result>       131 </span>
+<span class=result>           </span>|<span class=result>      0.07       1.47       1.19       3.54       5.01       5.03 </span>|<span class=result>      2.35 </span>
+-----------+------------------------------------------------------------------+----------
+    Others |<span class=result>        13         19         38         31         22          7 </span>|<span class=result>       130 </span>
+<span class=result>           </span>|<span class=result>      0.88       2.54       4.53       2.68       3.06       1.10 </span>|<span class=result>      2.33 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>     1,476        747        838      1,158        718        636 </span>|<span class=result>     5,573 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    reason |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+      Dead |<span class=result>         1         15         12         10         14         11 </span>|<span class=result>        63 </span>
+<span class=result>           </span>|<span class=result>     10.00      62.50      46.15      58.82      60.87      68.75 </span>|<span class=result>     54.31 </span>
+-----------+------------------------------------------------------------------+----------
+   Loss FU |<span class=result>         0          2          1          0          0          1 </span>|<span class=result>         4 </span>
+<span class=result>           </span>|<span class=result>      0.00       8.33       3.85       0.00       0.00       6.25 </span>|<span class=result>      3.45 </span>
+-----------+------------------------------------------------------------------+----------
+Transplant |<span class=result>         8          7          9          6          6          4 </span>|<span class=result>        40 </span>
+<span class=result>           </span>|<span class=result>     80.00      29.17      34.62      35.29      26.09      25.00 </span>|<span class=result>     34.48 </span>
+-----------+------------------------------------------------------------------+----------
+Pt-Refusal |<span class=result>         1          0          1          0          0          0 </span>|<span class=result>         2 </span>
+<span class=result>           </span>|<span class=result>     10.00       0.00       3.85       0.00       0.00       0.00 </span>|<span class=result>      1.72 </span>
+-----------+------------------------------------------------------------------+----------
+       C/I |<span class=result>         0          0          1          0          2          0 </span>|<span class=result>         3 </span>
+<span class=result>           </span>|<span class=result>      0.00       0.00       3.85       0.00       8.70       0.00 </span>|<span class=result>      2.59 </span>
+-----------+------------------------------------------------------------------+----------
+    Others |<span class=result>         0          0          2          1          1          0 </span>|<span class=result>         4 </span>
+<span class=result>           </span>|<span class=result>      0.00       0.00       7.69       5.88       4.35       0.00 </span>|<span class=result>      3.45 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        10         24         26         17         23         16 </span>|<span class=result>       116 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |           y
+    reason |      2008       2009 |     Total
+-----------+----------------------+----------
+   Loss FU |<span class=result>         0          1 </span>|<span class=result>         1 </span>
+<span class=result>           </span>|<span class=result>      0.00       7.69 </span>|<span class=result>      4.55 </span>
+-----------+----------------------+----------
+Transplant |<span class=result>         9         10 </span>|<span class=result>        19 </span>
+<span class=result>           </span>|<span class=result>    100.00      76.92 </span>|<span class=result>     86.36 </span>
+-----------+----------------------+----------
+       C/I |<span class=result>         0          2 </span>|<span class=result>         2 </span>
+<span class=result>           </span>|<span class=result>      0.00      15.38 </span>|<span class=result>      9.09 </span>
+-----------+----------------------+----------
+     Total |<span class=result>         9         13 </span>|<span class=result>        22 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                y
+    reason |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+      Dead |<span class=result>         0          1          9 </span>|<span class=result>        10 </span>
+<span class=result>           </span>|<span class=result>      0.00       0.17       1.67 </span>|<span class=result>      0.84 </span>
+-----------+---------------------------------+----------
+   Loss FU |<span class=result>         0         12         25 </span>|<span class=result>        37 </span>
+<span class=result>           </span>|<span class=result>      0.00       2.09       4.63 </span>|<span class=result>      3.10 </span>
+-----------+---------------------------------+----------
+Transplant |<span class=result>        66        448        407 </span>|<span class=result>       921 </span>
+<span class=result>           </span>|<span class=result>     82.50      78.18      75.37 </span>|<span class=result>     77.20 </span>
+-----------+---------------------------------+----------
+Pt-Refusal |<span class=result>         9         75         72 </span>|<span class=result>       156 </span>
+<span class=result>           </span>|<span class=result>     11.25      13.09      13.33 </span>|<span class=result>     13.08 </span>
+-----------+---------------------------------+----------
+       C/I |<span class=result>         1         16         13 </span>|<span class=result>        30 </span>
+<span class=result>           </span>|<span class=result>      1.25       2.79       2.41 </span>|<span class=result>      2.51 </span>
+-----------+---------------------------------+----------
+    Others |<span class=result>         4         21         14 </span>|<span class=result>        39 </span>
+<span class=result>           </span>|<span class=result>      5.00       3.66       2.59 </span>|<span class=result>      3.27 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        80        573        540 </span>|<span class=result>     1,193 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

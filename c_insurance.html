@@ -1,0 +1,276 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. label define insurance_stat 2 "Pending" 3 "Passed" 4 "Rejected"</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables:</span>
+<span class=input>. *   date, organ, status</span>
+<span class=input>. * Plans:</span>
+<span class=input>. *   Transplant candidates</span>
+<span class=input>. *   1. date range</span>
+<span class=input>. *   2. year * organ</span>
+<span class=input>. *   3. by organ, year * status</span>
+<span class=input>. *   4. with check_status=3 (passed review), year * organ</span>
+<span class=input>. </span>
+<span class=input>. label values organ_code organ_code</span>
+<br><br>
+<span class=input>. label values check_flag insurance_stat</span>
+<br><br>
+<span class=input>. dconv write_date</span>
+write_date already string; no <span class=result>replace</span>
+<br><br>
+<span class=input>. gen y=year(write_date)</span>
+<br><br>
+<span class=input>. drop if y&lt;2004</span>
+(252 observations deleted)
+<br><br>
+<span class=input>. tabstat write_date, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  write_~e
+---------+----------
+     min |<span class=result>2004-01-02</span>
+     max |<span class=result>2009-10-28</span>
+--------------------
+<br><br>
+<span class=input>. tab organ_code y</span>
+<br><br>
+<span class=result>           </span>|                                 y
+organ_code |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+     Heart |<span class=result>       242        188        231        221        194        181 </span>|<span class=result>     1,257 </span>
+     Liver |<span class=result>       505        637      1,041        812        832        869 </span>|<span class=result>     4,696 </span>
+    Kidney |<span class=result>     2,172      1,838      4,572      1,796      1,448      1,269 </span>|<span class=result>    13,095 </span>
+      Lung |<span class=result>        15         26         50         30         40         18 </span>|<span class=result>       179 </span>
+  Pancreas |<span class=result>         0          0          0          0         50         33 </span>|<span class=result>        83 </span>
+    Cornea |<span class=result>         0          0          0        526        704        600 </span>|<span class=result>     1,830 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>     2,934      2,689      5,894      3,385      3,268      2,970 </span>|<span class=result>    21,140 </span>
+<br><br>
+<br><br>
+<span class=input>. bysort organ_code: tab y check_flag, row</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++----------------+
+| Key            |
+|----------------|
+|   <i>frequency</i>    |
+| <i>row percentage</i> |
++----------------+
+<br><br>
+           |            check_flag
+         y |   Pending     Passed   Rejected |     Total
+-----------+---------------------------------+----------
+      2004 |<span class=result>         3         51        183 </span>|<span class=result>       237 </span>
+<span class=result>           </span>|<span class=result>      1.27      21.52      77.22 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2005 |<span class=result>         7        128         39 </span>|<span class=result>       174 </span>
+<span class=result>           </span>|<span class=result>      4.02      73.56      22.41 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2006 |<span class=result>        17        173         33 </span>|<span class=result>       223 </span>
+<span class=result>           </span>|<span class=result>      7.62      77.58      14.80 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2007 |<span class=result>        25        193          3 </span>|<span class=result>       221 </span>
+<span class=result>           </span>|<span class=result>     11.31      87.33       1.36 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2008 |<span class=result>        13        179          2 </span>|<span class=result>       194 </span>
+<span class=result>           </span>|<span class=result>      6.70      92.27       1.03 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2009 |<span class=result>        20        158          3 </span>|<span class=result>       181 </span>
+<span class=result>           </span>|<span class=result>     11.05      87.29       1.66 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        85        882        263 </span>|<span class=result>     1,230 </span>
+<span class=result>           </span>|<span class=result>      6.91      71.71      21.38 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++----------------+
+| Key            |
+|----------------|
+|   <i>frequency</i>    |
+| <i>row percentage</i> |
++----------------+
+<br><br>
+           |            check_flag
+         y |   Pending     Passed   Rejected |     Total
+-----------+---------------------------------+----------
+      2004 |<span class=result>         2         88        414 </span>|<span class=result>       504 </span>
+<span class=result>           </span>|<span class=result>      0.40      17.46      82.14 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2005 |<span class=result>         3        493        139 </span>|<span class=result>       635 </span>
+<span class=result>           </span>|<span class=result>      0.47      77.64      21.89 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2006 |<span class=result>        22        946         68 </span>|<span class=result>     1,036 </span>
+<span class=result>           </span>|<span class=result>      2.12      91.31       6.56 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2007 |<span class=result>       112        696          4 </span>|<span class=result>       812 </span>
+<span class=result>           </span>|<span class=result>     13.79      85.71       0.49 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2008 |<span class=result>        90        726         16 </span>|<span class=result>       832 </span>
+<span class=result>           </span>|<span class=result>     10.82      87.26       1.92 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2009 |<span class=result>        91        729         49 </span>|<span class=result>       869 </span>
+<span class=result>           </span>|<span class=result>     10.47      83.89       5.64 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       320      3,678        690 </span>|<span class=result>     4,688 </span>
+<span class=result>           </span>|<span class=result>      6.83      78.46      14.72 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++----------------+
+| Key            |
+|----------------|
+|   <i>frequency</i>    |
+| <i>row percentage</i> |
++----------------+
+<br><br>
+           | check_flag
+         y |    Passed |     Total
+-----------+-----------+----------
+      2004 |<span class=result>     2,172 </span>|<span class=result>     2,172 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+      2005 |<span class=result>     1,838 </span>|<span class=result>     1,838 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+      2006 |<span class=result>     4,572 </span>|<span class=result>     4,572 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+      2007 |<span class=result>     1,796 </span>|<span class=result>     1,796 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+      2008 |<span class=result>     1,448 </span>|<span class=result>     1,448 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+      2009 |<span class=result>     1,269 </span>|<span class=result>     1,269 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+     Total |<span class=result>    13,095 </span>|<span class=result>    13,095 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++----------------+
+| Key            |
+|----------------|
+|   <i>frequency</i>    |
+| <i>row percentage</i> |
++----------------+
+<br><br>
+           |            check_flag
+         y |   Pending     Passed   Rejected |     Total
+-----------+---------------------------------+----------
+      2004 |<span class=result>         0          5          9 </span>|<span class=result>        14 </span>
+<span class=result>           </span>|<span class=result>      0.00      35.71      64.29 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2005 |<span class=result>         0         22          4 </span>|<span class=result>        26 </span>
+<span class=result>           </span>|<span class=result>      0.00      84.62      15.38 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2006 |<span class=result>         4         41          4 </span>|<span class=result>        49 </span>
+<span class=result>           </span>|<span class=result>      8.16      83.67       8.16 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2007 |<span class=result>         4         25          1 </span>|<span class=result>        30 </span>
+<span class=result>           </span>|<span class=result>     13.33      83.33       3.33 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2008 |<span class=result>         8         32          0 </span>|<span class=result>        40 </span>
+<span class=result>           </span>|<span class=result>     20.00      80.00       0.00 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+      2009 |<span class=result>         2         16          0 </span>|<span class=result>        18 </span>
+<span class=result>           </span>|<span class=result>     11.11      88.89       0.00 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        18        141         18 </span>|<span class=result>       177 </span>
+<span class=result>           </span>|<span class=result>     10.17      79.66      10.17 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++----------------+
+| Key            |
+|----------------|
+|   <i>frequency</i>    |
+| <i>row percentage</i> |
++----------------+
+<br><br>
+           |      check_flag
+         y |    Passed   Rejected |     Total
+-----------+----------------------+----------
+      2008 |<span class=result>        50          0 </span>|<span class=result>        50 </span>
+<span class=result>           </span>|<span class=result>    100.00       0.00 </span>|<span class=result>    100.00 </span>
+-----------+----------------------+----------
+      2009 |<span class=result>        27          6 </span>|<span class=result>        33 </span>
+<span class=result>           </span>|<span class=result>     81.82      18.18 </span>|<span class=result>    100.00 </span>
+-----------+----------------------+----------
+     Total |<span class=result>        77          6 </span>|<span class=result>        83 </span>
+<span class=result>           </span>|<span class=result>     92.77       7.23 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++----------------+
+| Key            |
+|----------------|
+|   <i>frequency</i>    |
+| <i>row percentage</i> |
++----------------+
+<br><br>
+           | check_flag
+         y |    Passed |     Total
+-----------+-----------+----------
+      2007 |<span class=result>       526 </span>|<span class=result>       526 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+      2008 |<span class=result>       704 </span>|<span class=result>       704 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+      2009 |<span class=result>       600 </span>|<span class=result>       600 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+-----------+-----------+----------
+     Total |<span class=result>     1,830 </span>|<span class=result>     1,830 </span>
+<span class=result>           </span>|<span class=result>    100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. * Counts by year if insurance-passed</span>
+<span class=input>. tab organ_code y if check_flag==3</span>
+<br><br>
+<span class=result>           </span>|                                 y
+organ_code |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+     Heart |<span class=result>        51        128        173        193        179        158 </span>|<span class=result>       882 </span>
+     Liver |<span class=result>        88        493        946        696        726        729 </span>|<span class=result>     3,678 </span>
+    Kidney |<span class=result>     2,172      1,838      4,572      1,796      1,448      1,269 </span>|<span class=result>    13,095 </span>
+      Lung |<span class=result>         5         22         41         25         32         16 </span>|<span class=result>       141 </span>
+  Pancreas |<span class=result>         0          0          0          0         50         27 </span>|<span class=result>        77 </span>
+    Cornea |<span class=result>         0          0          0        526        704        600 </span>|<span class=result>     1,830 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>     2,316      2,481      5,732      3,236      3,139      2,799 </span>|<span class=result>    19,703 </span>
+<br><br>
+<br><br>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

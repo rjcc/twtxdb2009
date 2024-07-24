@@ -1,0 +1,462 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables:</span>
+<span class=input>. *   Candidates</span>
+<span class=input>. *      organ_code 1st_quietly login_date-&gt;exit_date exit_reason</span>
+<span class=input>. * Plans:</span>
+<span class=input>. *   Variables: wait_t cmvigg cmvigm pra</span>
+<span class=input>. *   Effect on outcomes</span>
+<span class=input>. </span>
+<span class=input>. </span>
+<span class=input>. tabstat graft_date, stat(min max) format(%dCY-N-D) col(var)</span>
+<br><br>
+   stats |  graft_~e
+---------+----------
+     min |<span class=result>2004-01-01</span>
+     max |<span class=result>2009-10-28</span>
+--------------------
+<br><br>
+<span class=input>. display "Up to 2009-10-28"</span>
+<span class=result>Up to 2009-10-28</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. forvalues i=1(1)6 {</span>
+  2<span class=input>.    disp "Organ=" `i'</span>
+  3<span class=input>.    pwcorrs pra wait_t if organ_code==`i', spearman sig star(0.05) obs</span>
+  4<span class=input>.    }</span>
+<span class=result>Organ=1</span>
+<span class=result>                           </span><span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      141</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      141      476</span>
+          |
+Organ=2
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      337</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      337     1264</span>
+          |
+Organ=3
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>      300</span>
+          |
+   wait_t | <span class=result> -0.0584   1.0000 </span>
+          |<span class=result>   0.3135</span>
+          |<span class=result>      300     1177</span>
+          |
+Organ=4
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>        7</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>        7       45</span>
+          |
+Organ=5
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>       33</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>       33       54</span>
+          |
+Organ=6
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      494</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      494     1004</span>
+          |
+<br><br>
+<span class=input>. gen die=1 if die_date!=.</span>
+(3790 missing values generated)
+<br><br>
+<span class=input>. replace die=0 if die_date==.</span>
+(3790 real changes made)
+<br><br>
+<span class=input>. gen fu_die=die_date-graft_date if die==1</span>
+(3790 missing values generated)
+<br><br>
+<span class=input>. replace fu_die=today-graft_date if die==0</span>
+(3790 real changes made)
+<br><br>
+<span class=input>. </span>
+<span class=input>. stset fu_die, failure(die==1) scale (30)</span>
+<br><br>
+<span class=result>     </span>failure event:  <span class=result>die == 1</span>
+obs. time interval:  <span class=result>(0, fu_die]</span>
+ exit on or before:  <span class=result>failure</span>
+<span class=result>    </span>t for analysis:  <span class=result>time/30</span>
+<br><br>
+------------------------------------------------------------------------------
+<span class=result>     4031</span>  total obs.
+<span class=result>        9</span>  obs. end on or before enter()
+------------------------------------------------------------------------------
+<span class=result>     4022</span>  obs. remaining, representing
+<span class=result>      233</span>  failures in single record/single failure data
+<span class=result> 95508.17</span>  total analysis time at risk, at risk from t = <span class=result>        0</span>
+<span class=result>                             </span>earliest observed entry t = <span class=result>        0</span>
+<span class=result>                                  </span>last observed exit t = <span class=result>     70.9</span>
+<br><br>
+<span class=input>. bysort organ_code: stcox wait_t</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-462.69522</span>
+Iteration 1:   log likelihood = <span class=result>-462.52732</span>
+Iteration 2:   log likelihood = <span class=result>-462.52577</span>
+Iteration 3:   log likelihood = <span class=result>-462.52576</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-462.52576</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>         475                     </span>Number of obs   =<span class=result>       475</span>
+No. of failures = <span class=result>          80</span>
+Time at risk    = <span class=result> 12747.73333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.34</span>
+Log likelihood  =   <span class=result>-462.52576                     </span>Prob &gt; chi2     =<span class=result>    0.5605</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   1.000272   .0004545     0.60   0.549     .9993819    1.001164</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-756.64292</span>
+Iteration 1:   log likelihood = <span class=result>-756.11416</span>
+Iteration 2:   log likelihood = <span class=result>-756.10275</span>
+Iteration 3:   log likelihood = <span class=result>-756.10275</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-756.10275</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>        1260                     </span>Number of obs   =<span class=result>      1260</span>
+No. of failures = <span class=result>         110</span>
+Time at risk    = <span class=result>     34153.2</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      1.08</span>
+Log likelihood  =   <span class=result>-756.10275                     </span>Prob &gt; chi2     =<span class=result>    0.2986</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   .9995347   .0004732    -0.98   0.326     .9986076    1.000463</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-159.70904</span>
+Iteration 1:   log likelihood = <span class=result>-159.25325</span>
+Iteration 2:   log likelihood = <span class=result>-159.24741</span>
+Iteration 3:   log likelihood = <span class=result>-159.24741</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-159.24741</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>        1175                     </span>Number of obs   =<span class=result>      1175</span>
+No. of failures = <span class=result>          24</span>
+Time at risk    = <span class=result>     33687.1</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.92</span>
+Log likelihood  =   <span class=result>-159.24741                     </span>Prob &gt; chi2     =<span class=result>    0.3366</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   1.000463   .0004674     0.99   0.321     .9995476     1.00138</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-65.219892</span>
+Iteration 1:   log likelihood = <span class=result>-64.998793</span>
+Iteration 2:   log likelihood = <span class=result>-64.995736</span>
+Iteration 3:   log likelihood = <span class=result>-64.995735</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-64.995735</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>          44                     </span>Number of obs   =<span class=result>        44</span>
+No. of failures = <span class=result>          19</span>
+Time at risk    = <span class=result> 803.9666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.45</span>
+Log likelihood  =   <span class=result>-64.995735                     </span>Prob &gt; chi2     =<span class=result>    0.5031</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>    .999115   .0013819    -0.64   0.522     .9964102    1.001827</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          54                     </span>Number of obs   =<span class=result>        54</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 836.0666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>        1003                     </span>Number of obs   =<span class=result>      1003</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 12852.43333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. quietly log off</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. gen gfail=1 if collapse_date!=.</span>
+(4017 missing values generated)
+<br><br>
+<span class=input>. replace gfail=0 if collapse_date==.</span>
+(4017 real changes made)
+<br><br>
+<span class=input>. gen fu_gfail=collapse_date-graft_date if gfail==1</span>
+(4017 missing values generated)
+<br><br>
+<span class=input>. replace fu_gfail=today-graft_date if gfail==0 &amp; die_date==.</span>
+(3783 real changes made)
+<br><br>
+<span class=input>. replace fu_gfail=die_date-graft_date if gfail==0 &amp; die_date!=.</span>
+(234 real changes made)
+<br><br>
+<span class=input>. </span>
+<span class=input>. stset fu_gfail, failure(gfail==1) scale (30)</span>
+<br><br>
+<span class=result>     </span>failure event:  <span class=result>gfail == 1</span>
+obs. time interval:  <span class=result>(0, fu_gfail]</span>
+ exit on or before:  <span class=result>failure</span>
+<span class=result>    </span>t for analysis:  <span class=result>time/30</span>
+<br><br>
+------------------------------------------------------------------------------
+<span class=result>     4031</span>  total obs.
+<span class=result>       11</span>  obs. end on or before enter()
+------------------------------------------------------------------------------
+<span class=result>     4020</span>  obs. remaining, representing
+<span class=result>       12</span>  failures in single record/single failure data
+<span class=result>  95278.5</span>  total analysis time at risk, at risk from t = <span class=result>        0</span>
+<span class=result>                             </span>earliest observed entry t = <span class=result>        0</span>
+<span class=result>                                  </span>last observed exit t = <span class=result>     70.9</span>
+<br><br>
+<span class=input>. dd wait_t 3</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result> -34.54844</span>
+Iteration 1:   log likelihood = <span class=result>-34.348362</span>
+Iteration 2:   log likelihood = <span class=result> -34.34352</span>
+Iteration 3:   log likelihood = <span class=result>-34.343515</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-34.343515</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>        1174                     </span>Number of obs   =<span class=result>      1174</span>
+No. of failures = <span class=result>           5</span>
+Time at risk    = <span class=result> 33550.06667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.41</span>
+Log likelihood  =   <span class=result>-34.343515                     </span>Prob &gt; chi2     =<span class=result>    0.5220</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   .9992227   .0012967    -0.60   0.549     .9966845    1.001767</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. dd wait_t 2</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-41.025926</span>
+Iteration 1:   log likelihood = <span class=result>-40.470948</span>
+Iteration 2:   log likelihood = <span class=result>-40.463301</span>
+Iteration 3:   log likelihood = <span class=result>-40.463273</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-40.463273</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>        1259                     </span>Number of obs   =<span class=result>      1259</span>
+No. of failures = <span class=result>           6</span>
+Time at risk    = <span class=result> 34060.56667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      1.13</span>
+Log likelihood  =   <span class=result>-40.463273                     </span>Prob &gt; chi2     =<span class=result>    0.2888</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   1.001212   .0009629     1.26   0.208     .9993266    1.003101</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. gen eyefail=1 if eye_condi_date!=.</span>
+(4030 missing values generated)
+<br><br>
+<span class=input>. replace eyefail=0 if eye_condi_date==.</span>
+(4030 real changes made)
+<br><br>
+<span class=input>. gen fu_eyefail=eye_condi_date-graft_date if eyefail==1</span>
+(4030 missing values generated)
+<br><br>
+<span class=input>. replace fu_eyefail=today-graft_date if eyefail==0 &amp; die_date==.</span>
+(3789 real changes made)
+<br><br>
+<span class=input>. replace fu_eyefail=die_date-graft_date if eyefail==0 &amp; die_date!=.</span>
+(241 real changes made)
+<br><br>
+<span class=input>. </span>
+<span class=input>. stset fu_eyefail, failure(eyefail==1) scale (30)</span>
+<br><br>
+<span class=result>     </span>failure event:  <span class=result>eyefail == 1</span>
+obs. time interval:  <span class=result>(0, fu_eyefail]</span>
+ exit on or before:  <span class=result>failure</span>
+<span class=result>    </span>t for analysis:  <span class=result>time/30</span>
+<br><br>
+------------------------------------------------------------------------------
+<span class=result>     4031</span>  total obs.
+<span class=result>        9</span>  obs. end on or before enter()
+------------------------------------------------------------------------------
+<span class=result>     4022</span>  obs. remaining, representing
+<span class=result>        1</span>  failure in single record/single failure data
+<span class=result> 95489.33</span>  total analysis time at risk, at risk from t = <span class=result>        0</span>
+<span class=result>                             </span>earliest observed entry t = <span class=result>        0</span>
+<span class=result>                                  </span>last observed exit t = <span class=result>     70.9</span>
+<br><br>
+<span class=input>. dd wait_t 6</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>eyefail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_eyefail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-6.8977049</span>
+Iteration 1:   log likelihood = <span class=result>-6.8955438</span>
+Iteration 2:   log likelihood = <span class=result>-6.8955336</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-6.8955336</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>        1003                     </span>Number of obs   =<span class=result>      1003</span>
+No. of failures = <span class=result>           1</span>
+Time at risk    = <span class=result>     12833.6</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>-6.8955336                     </span>Prob &gt; chi2     =<span class=result>    0.9475</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   1.000254   .0037726     0.07   0.946     .9928871    1.007676</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

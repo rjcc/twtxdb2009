@@ -1,0 +1,1126 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. gen hepatitis=0 if anti_hcv==0| anti_hbc==0 | anti_hbs==0| hbs_ag==0</span>
+(216 missing values generated)
+<br><br>
+<span class=input>. replace hepatitis=1 if anti_hcv==1&amp; anti_hbc==1&amp; anti_hbs==1&amp; hbs_ag==1</span>
+(117 real changes made)
+<br><br>
+<span class=input>. replace hepatitis=999 if hepatitis==.</span>
+(99 real changes made)
+<br><br>
+<span class=input>. label values hepatitis yn</span>
+<br><br>
+<span class=input>. gen wait1=substr(trim(more_wait),1,1)</span>
+(1088 missing values generated)
+<br><br>
+<span class=input>. gen wait2=substr(trim(more_wait),-1,1)</span>
+(1088 missing values generated)
+<br><br>
+<span class=input>. destring wait1 wait2, replace</span>
+wait1 has all characters numeric; <span class=result>replaced </span>as <span class=result>byte</span>
+(1088 missing values generated)
+wait2 has all characters numeric; <span class=result>replaced </span>as <span class=result>byte</span>
+(1088 missing values generated)
+<br><br>
+<span class=input>. label values wait1 organ_code</span>
+<br><br>
+<span class=input>. label values wait2 organ_code</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables:</span>
+<span class=input>. *   matched candidate-donor with transplant</span>
+<span class=input>. *   donor: transplant_date id_no hbs_ag anti_hbs anti_hbc anti_hcv</span>
+<span class=input>. *   candidate:</span>
+<span class=input>. *      all: wtg_transplant_date wtg_age cond_level wait_day(invalid) wait1 wait2</span>
+<span class=input>. *      heart: ecmo iabp mv vad</span>
+<span class=input>. *      liver: meld_score hcc</span>
+<span class=input>. *      kidney: score area_code</span>
+<span class=input>. *         waittime_score hla_score age_score donor_score hbs_ag_score anti_hcv_score</span>
+<span class=input>. *      lung: mv</span>
+<span class=input>. *      pancreas: score</span>
+<span class=input>. *         waittime_score hla_score age_score hbs_ag_score anti_hcv_score blood_score</span>
+<span class=input>. *      cornea: </span>
+<span class=input>. * Plans: Keep only matched donor-candidates with transplantation</span>
+<span class=input>. *   1. Donor stat</span>
+<span class=input>. *   2. By organ: yearly statistics</span>
+<span class=input>. *   3. Organ-specific variables and labelling</span>
+<span class=input>. </span>
+<span class=input>. * Only matched donors with transplanted candidates </span>
+<span class=input>. display "age_score: (kidney) &lt;11:+4, 11~18:+3, &gt;18:+2"</span>
+<span class=result>age_score: (kidney) &lt;11:+4, 11~18:+3, &gt;18:+2</span>
+<br><br>
+<span class=input>. display "age_score: (pancreas) &lt;18:+3, 18~55:+3, &gt;55:+3"</span>
+<span class=result>age_score: (pancreas) &lt;18:+3, 18~55:+3, &gt;55:+3</span>
+<br><br>
+<span class=input>. display "donor_score: (kidney) +4 if prior donor"</span>
+<span class=result>donor_score: (kidney) +4 if prior donor</span>
+<br><br>
+<span class=input>. display "blood_score: (pancreas) +1 if identical"</span>
+<span class=result>blood_score: (pancreas) +1 if identical</span>
+<br><br>
+<span class=input>. display "waittime_score: +0.5/yr, max 2"</span>
+<span class=result>waittime_score: +0.5/yr, max 2</span>
+<br><br>
+<span class=input>. display "hla_score: (kidney) BDR miamatch: +4 if 0, +3 if 1, +2 if 2"</span>
+<span class=result>hla_score: (kidney) BDR miamatch: +4 if 0, +3 if 1, +2 if 2</span>
+<br><br>
+<span class=input>. display "hla_score: (pancreas) BDR mismatch: +8 if 0, +6 if 1, +4 if 2"</span>
+<span class=result>hla_score: (pancreas) BDR mismatch: +8 if 0, +6 if 1, +4 if 2</span>
+<br><br>
+<span class=input>. display "hbs_ag_score: -1 if (+)"</span>
+<span class=result>hbs_ag_score: -1 if (+)</span>
+<br><br>
+<span class=input>. display "anti_hcv_score: -1 if (+)"</span>
+<span class=result>anti_hcv_score: -1 if (+)</span>
+<br><br>
+<span class=input>. display "Kidney: score=age donor waittime hla hbs_ag anti_hcv"</span>
+<span class=result>Kidney: score=age donor waittime hla hbs_ag anti_hcv</span>
+<br><br>
+<span class=input>. display "Pancreas: score=age blood waitimg hla hbs_ag anti_hcv"</span>
+<span class=result>Pancreas: score=age blood waitimg hla hbs_ag anti_hcv</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * area_code: needed in kidney (N M S E) and lung (N M S)</span>
+<span class=input>. </span>
+<span class=input>. keep if y_tx&gt;2000</span>
+(0 observations deleted)
+<br><br>
+<span class=input>. misstable summarize _all</span>
+                                                               Obs&lt;.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs&gt;.     Obs&lt;.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+      anti_hbc |<span class=result>       151</span>          <span class=result>       943</span>  |      2          0           1
+      anti_hcv |<span class=result>       183</span>          <span class=result>       911</span>  |      2          0           1
+          ecmo |<span class=result>       932</span>          <span class=result>       162</span>  |      2          0           1
+          iabp |<span class=result>       932</span>          <span class=result>       162</span>  |      2          0           1
+            mv |<span class=result>       932</span>          <span class=result>       162</span>  |      2          0           1
+           vad |<span class=result>       932</span>          <span class=result>       162</span>  |      2          0           1
+         score |<span class=result>       590</span>          <span class=result>       504</span>  |     53          1          50
+      hla_flag |<span class=result>       704</span>          <span class=result>       390</span>  |      7          0           6
+     hla_score |<span class=result>       805</span>          <span class=result>       289</span>  |      6          2           7
+     age_score |<span class=result>       779</span>          <span class=result>       315</span>  |      3          2           4
+   donor_score |<span class=result>     1,094</span>          <span class=result>         0</span>  |      0          .           .
+  hbs_ag_score |<span class=result>     1,094</span>          <span class=result>         0</span>  |      0          .           .
+  anti_hcv_s~e |<span class=result>     1,094</span>          <span class=result>         0</span>  |      0          .           .
+   blood_score |<span class=result>       741</span>          <span class=result>       353</span>  |      3          1           4
+           hcc |<span class=result>       982</span>          <span class=result>       112</span>  |      2          0           1
+  transplant~e |<span class=result>         9</span>          <span class=result>     1,085</span>  |    327      17171       18195
+          y_tx |<span class=result>         9</span>          <span class=result>     1,085</span>  |      3       2007        2009
+         wait1 |<span class=result>     1,088</span>          <span class=result>         6</span>  |      3          1           5
+         wait2 |<span class=result>     1,088</span>          <span class=result>         6</span>  |      1          3           3
+  -----------------------------------------------------------------------------
+<br><br>
+<span class=input>. * Drop unreliable data before 2000</span>
+<span class=input>. * Donor</span>
+<span class=input>. tabstat transplant_date, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  transp~e
+---------+----------
+     min |<span class=result>2007-01-05</span>
+     max |<span class=result>2009-10-25</span>
+--------------------
+<br><br>
+<span class=input>. * Hepatitis=Y if anti_hcv=Y or anti_hbc=Y or anti_hbe=Y or hbs_ag=Y </span>
+<span class=input>. * Hepatitis=N if all above N</span>
+<span class=input>. bysort organ_code: tab hepatitis y_tx, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+ hepatitis |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>        37         45         49 </span>|<span class=result>       131 </span>
+<span class=result>           </span>|<span class=result>     86.05      76.27      83.05 </span>|<span class=result>     81.37 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>         6         14         10 </span>|<span class=result>        30 </span>
+<span class=result>           </span>|<span class=result>     13.95      23.73      16.95 </span>|<span class=result>     18.63 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        43         59         59 </span>|<span class=result>       161 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+ hepatitis |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>        31         55         50 </span>|<span class=result>       136 </span>
+<span class=result>           </span>|<span class=result>     88.57      96.49      89.29 </span>|<span class=result>     91.89 </span>
+-----------+---------------------------------+----------
+         ? |<span class=result>         4          2          6 </span>|<span class=result>        12 </span>
+<span class=result>           </span>|<span class=result>     11.43       3.51      10.71 </span>|<span class=result>      8.11 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        35         57         56 </span>|<span class=result>       148 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+ hepatitis |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>        62        110        118 </span>|<span class=result>       290 </span>
+<span class=result>           </span>|<span class=result>     78.48      76.39      79.73 </span>|<span class=result>     78.17 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>        17         34         30 </span>|<span class=result>        81 </span>
+<span class=result>           </span>|<span class=result>     21.52      23.61      20.27 </span>|<span class=result>     21.83 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        79        144        148 </span>|<span class=result>       371 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+ hepatitis |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>         0          2          4 </span>|<span class=result>         6 </span>
+<span class=result>           </span>|<span class=result>      0.00      66.67     100.00 </span>|<span class=result>     66.67 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>         2          1          0 </span>|<span class=result>         3 </span>
+<span class=result>           </span>|<span class=result>    100.00      33.33       0.00 </span>|<span class=result>     33.33 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>         2          3          4 </span>|<span class=result>         9 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |         y_tx
+ hepatitis |      2008       2009 |     Total
+-----------+----------------------+----------
+         Y |<span class=result>         6          6 </span>|<span class=result>        12 </span>
+<span class=result>           </span>|<span class=result>    100.00      66.67 </span>|<span class=result>     80.00 </span>
+-----------+----------------------+----------
+         N |<span class=result>         0          3 </span>|<span class=result>         3 </span>
+<span class=result>           </span>|<span class=result>      0.00      33.33 </span>|<span class=result>     20.00 </span>
+-----------+----------------------+----------
+     Total |<span class=result>         6          9 </span>|<span class=result>        15 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+ hepatitis |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>        29        139        126 </span>|<span class=result>       294 </span>
+<span class=result>           </span>|<span class=result>    100.00      86.88      65.62 </span>|<span class=result>     77.17 </span>
+-----------+---------------------------------+----------
+         ? |<span class=result>         0         21         66 </span>|<span class=result>        87 </span>
+<span class=result>           </span>|<span class=result>      0.00      13.12      34.38 </span>|<span class=result>     22.83 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        29        160        192 </span>|<span class=result>       381 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. * bysort organ_code: tabstat wait_day, by(y_tx) stat(n mean sd med min max) format(%9.2g)</span>
+<span class=input>. * Elsewhere for wait_day (wait_time)</span>
+<span class=input>. bysort organ_code: tabstat wtg_age, by(y_tx) stat(n mean sd med min max) format(%9.2g)</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+Summary for variables: wtg_age
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2007 | <span class=result>       43        46        16        50         2        68</span>
+    2008 | <span class=result>       59        43        15        46         5        68</span>
+    2009 | <span class=result>       59        49        12        48        13        74</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      161        46        14        48         2        74</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+Summary for variables: wtg_age
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2007 | <span class=result>       35        47        14        51        14        65</span>
+    2008 | <span class=result>       57        47        15        50         1        64</span>
+    2009 | <span class=result>       56        46        12        48         5        63</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      148        47        13        49         1        65</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+Summary for variables: wtg_age
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2007 | <span class=result>       79        44        11        46         9        67</span>
+    2008 | <span class=result>      144        43        12        46         9        66</span>
+    2009 | <span class=result>      148        44        12        46        10        65</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      371        44        12        46         9        67</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+Summary for variables: wtg_age
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2007 | <span class=result>        2        38        11        38        30        46</span>
+    2008 | <span class=result>        3        34        12        39        20        43</span>
+    2009 | <span class=result>        4        46       9.8        50        32        54</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>        9        40        11        43        20        54</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+Summary for variables: wtg_age
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2008 | <span class=result>        6        32       6.9        34        22        41</span>
+    2009 | <span class=result>        9        31        11        29        16        48</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>       15        31       9.5        33        16        48</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+Summary for variables: wtg_age
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2007 | <span class=result>       29        53        19        56        18        84</span>
+    2008 | <span class=result>      160        54        21        58         5        84</span>
+    2009 | <span class=result>      192        54        21        58         0        88</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      381        54        21        58         0        88</span>
+----------------------------------------------------------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. list wtg_id_no transplant_date organ_code more_wait wait1 wait2 if wait1!=. | wait2!=.</span>
+<br><br>
+      +-------------------------------------------------------------------+
+      | <span class=result> wtg_id_no   transpla~e   organ_~e   more_w~t      wait1    wait2 </span>|
+      |-------------------------------------------------------------------|
+ 179. | <span class=result>c0c513b7c2   2009-04-24      Liver        2,3      Liver   Kidney </span>|
+ 407. | <span class=result>b683da7546   2009-06-30     Kidney        5,3   Pancreas   Kidney </span>|
+ 662. | <span class=result>8e66331099   2009-02-03     Kidney        1,3      Heart   Kidney </span>|
+ 686. | <span class=result>c0c513b7c2   2009-04-24     Kidney        2,3      Liver   Kidney </span>|
+ 701. | <span class=result>5fee07349d   2009-07-24   Pancreas        5,3   Pancreas   Kidney </span>|
+      |-------------------------------------------------------------------|
+ 709. | <span class=result>093e3f4f02   2009-05-05   Pancreas        5,3   Pancreas   Kidney </span>|
+      +-------------------------------------------------------------------+
+<br><br>
+<span class=input>. bysort organ_code: tab hosp_group y_tx</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+           |               y_tx
+hosp_group |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         1 |<span class=result>         1          2          2 </span>|<span class=result>         5 </span>
+         2 |<span class=result>         2         11          6 </span>|<span class=result>        19 </span>
+         4 |<span class=result>         2          2          1 </span>|<span class=result>         5 </span>
+         5 |<span class=result>         5          4          2 </span>|<span class=result>        11 </span>
+         6 |<span class=result>        15         20         27 </span>|<span class=result>        62 </span>
+         8 |<span class=result>         3          2          1 </span>|<span class=result>         6 </span>
+         9 |<span class=result>        15         17         20 </span>|<span class=result>        52 </span>
+        10 |<span class=result>         0          1          0 </span>|<span class=result>         1 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        43         59         59 </span>|<span class=result>       161 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+           |               y_tx
+hosp_group |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         1 |<span class=result>         6          8          5 </span>|<span class=result>        19 </span>
+         2 |<span class=result>         0         10         15 </span>|<span class=result>        25 </span>
+         3 |<span class=result>         1          2          1 </span>|<span class=result>         4 </span>
+         4 |<span class=result>         0          0          2 </span>|<span class=result>         2 </span>
+         5 |<span class=result>         6          5          2 </span>|<span class=result>        13 </span>
+         6 |<span class=result>         8          5          7 </span>|<span class=result>        20 </span>
+         7 |<span class=result>         1          2          3 </span>|<span class=result>         6 </span>
+         8 |<span class=result>         7         12          4 </span>|<span class=result>        23 </span>
+         9 |<span class=result>         5          7          9 </span>|<span class=result>        21 </span>
+        10 |<span class=result>         0          4          5 </span>|<span class=result>         9 </span>
+        11 |<span class=result>         1          2          3 </span>|<span class=result>         6 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        35         57         56 </span>|<span class=result>       148 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+           |               y_tx
+hosp_group |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         1 |<span class=result>        11         11          7 </span>|<span class=result>        29 </span>
+         2 |<span class=result>         6         38         29 </span>|<span class=result>        73 </span>
+         3 |<span class=result>         2          6          2 </span>|<span class=result>        10 </span>
+         4 |<span class=result>         6          2          9 </span>|<span class=result>        17 </span>
+         5 |<span class=result>        14         15         14 </span>|<span class=result>        43 </span>
+         6 |<span class=result>        16         10         12 </span>|<span class=result>        38 </span>
+         7 |<span class=result>         1         13          2 </span>|<span class=result>        16 </span>
+         8 |<span class=result>        14         18          6 </span>|<span class=result>        38 </span>
+         9 |<span class=result>         9         16         39 </span>|<span class=result>        64 </span>
+        10 |<span class=result>         0         12         20 </span>|<span class=result>        32 </span>
+        11 |<span class=result>         0          3          8 </span>|<span class=result>        11 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        79        144        148 </span>|<span class=result>       371 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+           |               y_tx
+hosp_group |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         2 |<span class=result>         0          1          2 </span>|<span class=result>         3 </span>
+         9 |<span class=result>         2          1          2 </span>|<span class=result>         5 </span>
+        10 |<span class=result>         0          1          0 </span>|<span class=result>         1 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>         2          3          4 </span>|<span class=result>         9 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+           |         y_tx
+hosp_group |      2008       2009 |     Total
+-----------+----------------------+----------
+         5 |<span class=result>         5          8 </span>|<span class=result>        13 </span>
+         9 |<span class=result>         1          1 </span>|<span class=result>         2 </span>
+-----------+----------------------+----------
+     Total |<span class=result>         6          9 </span>|<span class=result>        15 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+           |               y_tx
+hosp_group |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         1 |<span class=result>         2         21         16 </span>|<span class=result>        39 </span>
+         2 |<span class=result>         0         23         27 </span>|<span class=result>        50 </span>
+         3 |<span class=result>         1          9          6 </span>|<span class=result>        16 </span>
+         4 |<span class=result>         0          0         10 </span>|<span class=result>        10 </span>
+         5 |<span class=result>         0          8         21 </span>|<span class=result>        29 </span>
+         6 |<span class=result>         7         15         14 </span>|<span class=result>        36 </span>
+         7 |<span class=result>         1         19         21 </span>|<span class=result>        41 </span>
+         8 |<span class=result>        10         32         16 </span>|<span class=result>        58 </span>
+         9 |<span class=result>         2         14         36 </span>|<span class=result>        52 </span>
+        10 |<span class=result>         6         14         25 </span>|<span class=result>        45 </span>
+        11 |<span class=result>         0          5          0 </span>|<span class=result>         5 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        29        160        192 </span>|<span class=result>       381 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. *  heart: ecmo iabp mv vad</span>
+<span class=input>. *  liver: meld_score hcc</span>
+<span class=input>. *  kidney: score area_code</span>
+<span class=input>. *     waittime_score hla_score age_score donor_score hbs_ag_score anti_hcv_score</span>
+<span class=input>. *  lung: mv</span>
+<span class=input>. *  pancreas: score</span>
+<span class=input>. *     waittime_score hla_score age_score hbs_ag_score anti_hcv_score blood_score</span>
+<span class=input>. *  cornea: </span>
+<span class=input>. </span>
+<span class=input>. * Heart</span>
+<span class=input>. tabstat transplant_date if organ_code==1, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  transp~e
+---------+----------
+     min |<span class=result>2007-01-05</span>
+     max |<span class=result>2009-10-23</span>
+--------------------
+<br><br>
+<span class=input>. tab ecmo y_tx if organ_code==1,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+      ecmo |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>         6          9         11 </span>|<span class=result>        26 </span>
+<span class=result>           </span>|<span class=result>     13.95      15.25      18.64 </span>|<span class=result>     16.15 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>        37         50         48 </span>|<span class=result>       135 </span>
+<span class=result>           </span>|<span class=result>     86.05      84.75      81.36 </span>|<span class=result>     83.85 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        43         59         59 </span>|<span class=result>       161 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab iabp y_tx if organ_code==1,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+      iabp |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>        10         13         19 </span>|<span class=result>        42 </span>
+<span class=result>           </span>|<span class=result>     23.26      22.03      32.20 </span>|<span class=result>     26.09 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>        33         46         40 </span>|<span class=result>       119 </span>
+<span class=result>           </span>|<span class=result>     76.74      77.97      67.80 </span>|<span class=result>     73.91 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        43         59         59 </span>|<span class=result>       161 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab vad y_tx if organ_code==1,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+       vad |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>         0          6          4 </span>|<span class=result>        10 </span>
+<span class=result>           </span>|<span class=result>      0.00      10.17       6.78 </span>|<span class=result>      6.21 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>        43         53         55 </span>|<span class=result>       151 </span>
+<span class=result>           </span>|<span class=result>    100.00      89.83      93.22 </span>|<span class=result>     93.79 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        43         59         59 </span>|<span class=result>       161 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab mv y_tx if organ_code==1,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+        mv |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>        36         12         12 </span>|<span class=result>        60 </span>
+<span class=result>           </span>|<span class=result>     83.72      20.34      20.34 </span>|<span class=result>     37.27 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>         7         47         47 </span>|<span class=result>       101 </span>
+<span class=result>           </span>|<span class=result>     16.28      79.66      79.66 </span>|<span class=result>     62.73 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        43         59         59 </span>|<span class=result>       161 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. label values cond_level cond_l_heart</span>
+<br><br>
+<span class=input>. tab cond_level y_tx if organ_code==1,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+cond_level |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+   Stat-1A |<span class=result>        15         21         30 </span>|<span class=result>        66 </span>
+<span class=result>           </span>|<span class=result>     34.88      35.59      50.85 </span>|<span class=result>     40.99 </span>
+-----------+---------------------------------+----------
+   Stat-1B |<span class=result>        19         20         17 </span>|<span class=result>        56 </span>
+<span class=result>           </span>|<span class=result>     44.19      33.90      28.81 </span>|<span class=result>     34.78 </span>
+-----------+---------------------------------+----------
+    Stat-2 |<span class=result>         9         18         12 </span>|<span class=result>        39 </span>
+<span class=result>           </span>|<span class=result>     20.93      30.51      20.34 </span>|<span class=result>     24.22 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        43         59         59 </span>|<span class=result>       161 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Liver</span>
+<span class=input>. mvdecode meld_score, mv(0)</span>
+<span class=result>  </span>meld_score:<span class=result> 947</span> missing values generated
+<br><br>
+<span class=input>. tabstat transplant_date if organ_code==2, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  transp~e
+---------+----------
+     min |<span class=result>2007-01-31</span>
+     max |<span class=result>2009-10-23</span>
+--------------------
+<br><br>
+<span class=input>. tab hcc y_tx if organ_code==2 &amp; y_tx&gt;=2007,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+       hcc |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         Y |<span class=result>         0         10          8 </span>|<span class=result>        18 </span>
+<span class=result>           </span>|<span class=result>      0.00      18.52      14.29 </span>|<span class=result>     16.22 </span>
+-----------+---------------------------------+----------
+         N |<span class=result>         1         44         48 </span>|<span class=result>        93 </span>
+<span class=result>           </span>|<span class=result>    100.00      81.48      85.71 </span>|<span class=result>     83.78 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>         1         54         56 </span>|<span class=result>       111 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. replace meld_score=40 if organ_code==2 &amp; wtg_age&gt;=18 &amp; meld_score&gt;40</span>
+(4 real changes made)
+<br><br>
+<span class=input>. tabstat meld_score if organ_code==2 &amp; wtg_age&gt;=18, by(y_tx) stat(n mean sd med min max) format(%9.2g)</span>
+<br><br>
+Summary for variables: meld_score
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2007 | <span class=result>       33        24        10        22         9        40</span>
+    2008 | <span class=result>       52        21       9.5        18         6        40</span>
+    2009 | <span class=result>       54        22       8.6        19         8        40</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      139        22       9.4        19         6        40</span>
+----------------------------------------------------------------------
+<br><br>
+<span class=input>. tabstat meld_score if organ_code==2 &amp; wtg_age&lt;18, by(y_tx) stat(n mean sd med min max) format(%9.2g)</span>
+<br><br>
+Summary for variables: meld_score
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2007 | <span class=result>        2        15       4.9        15        11        18</span>
+    2008 | <span class=result>        5        20        11        24         3        31</span>
+    2009 | <span class=result>        2        21        13        21        11        30</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>        9        19       9.8        18         3        31</span>
+----------------------------------------------------------------------
+<br><br>
+<span class=input>. label values cond_level cond_l_liver</span>
+<br><br>
+<span class=input>. tab cond_level y_tx if organ_code==2,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+cond_level |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+    Stat-1 |<span class=result>         3          3          3 </span>|<span class=result>         9 </span>
+<span class=result>           </span>|<span class=result>      8.57       5.26       5.36 </span>|<span class=result>      6.08 </span>
+-----------+---------------------------------+----------
+Non-Stat-1 |<span class=result>        32         54         53 </span>|<span class=result>       139 </span>
+<span class=result>           </span>|<span class=result>     91.43      94.74      94.64 </span>|<span class=result>     93.92 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        35         57         56 </span>|<span class=result>       148 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Kidney</span>
+<span class=input>. tabstat transplant_date if organ_code==3, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  transp~e
+---------+----------
+     min |<span class=result>2007-01-05</span>
+     max |<span class=result>2009-10-23</span>
+--------------------
+<br><br>
+<span class=input>. tab area_code y_tx if organ_code==3,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+ area_code |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+     North |<span class=result>        58         54         64 </span>|<span class=result>       176 </span>
+<span class=result>           </span>|<span class=result>     73.42      37.50      43.24 </span>|<span class=result>     47.44 </span>
+-----------+---------------------------------+----------
+       Mid |<span class=result>         3         21         33 </span>|<span class=result>        57 </span>
+<span class=result>           </span>|<span class=result>      3.80      14.58      22.30 </span>|<span class=result>     15.36 </span>
+-----------+---------------------------------+----------
+     South |<span class=result>        17         58         49 </span>|<span class=result>       124 </span>
+<span class=result>           </span>|<span class=result>     21.52      40.28      33.11 </span>|<span class=result>     33.42 </span>
+-----------+---------------------------------+----------
+      East |<span class=result>         1         11          2 </span>|<span class=result>        14 </span>
+<span class=result>           </span>|<span class=result>      1.27       7.64       1.35 </span>|<span class=result>      3.77 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        79        144        148 </span>|<span class=result>       371 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tabstat score if organ_code==3 &amp; y_tx&gt;=2008, by(y_tx) stat(n mean sd med min max) format(%9.2g)</span>
+<br><br>
+Summary for variables: score
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2008 | <span class=result>      144         8       1.7       8.5         4        11</span>
+    2009 | <span class=result>      148       7.8       1.9         8         1        12</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      292       7.9       1.8       8.5         1        12</span>
+----------------------------------------------------------------------
+<br><br>
+<span class=input>. tab waittime_score y_tx if organ_code==3 &amp; y_tx&gt;=2008, col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+waittime_s |         y_tx
+      core |      2008       2009 |     Total
+-----------+----------------------+----------
+         0 |<span class=result>        22         21 </span>|<span class=result>        43 </span>
+<span class=result>           </span>|<span class=result>     15.28      14.19 </span>|<span class=result>     14.73 </span>
+-----------+----------------------+----------
+        .5 |<span class=result>        28         31 </span>|<span class=result>        59 </span>
+<span class=result>           </span>|<span class=result>     19.44      20.95 </span>|<span class=result>     20.21 </span>
+-----------+----------------------+----------
+         1 |<span class=result>        21         24 </span>|<span class=result>        45 </span>
+<span class=result>           </span>|<span class=result>     14.58      16.22 </span>|<span class=result>     15.41 </span>
+-----------+----------------------+----------
+       1.5 |<span class=result>        29         19 </span>|<span class=result>        48 </span>
+<span class=result>           </span>|<span class=result>     20.14      12.84 </span>|<span class=result>     16.44 </span>
+-----------+----------------------+----------
+         2 |<span class=result>        44         53 </span>|<span class=result>        97 </span>
+<span class=result>           </span>|<span class=result>     30.56      35.81 </span>|<span class=result>     33.22 </span>
+-----------+----------------------+----------
+     Total |<span class=result>       144        148 </span>|<span class=result>       292 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab hla_score y_tx if organ_code==3 &amp; y_tx&gt;=2008,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |         y_tx
+ hla_score |      2008       2009 |     Total
+-----------+----------------------+----------
+         2 |<span class=result>        53         61 </span>|<span class=result>       114 </span>
+<span class=result>           </span>|<span class=result>     45.69      53.98 </span>|<span class=result>     49.78 </span>
+-----------+----------------------+----------
+         3 |<span class=result>        31         29 </span>|<span class=result>        60 </span>
+<span class=result>           </span>|<span class=result>     26.72      25.66 </span>|<span class=result>     26.20 </span>
+-----------+----------------------+----------
+         4 |<span class=result>        32         23 </span>|<span class=result>        55 </span>
+<span class=result>           </span>|<span class=result>     27.59      20.35 </span>|<span class=result>     24.02 </span>
+-----------+----------------------+----------
+     Total |<span class=result>       116        113 </span>|<span class=result>       229 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab age_score y_tx if organ_code==3 &amp; y_tx&gt;=2008,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |         y_tx
+ age_score |      2008       2009 |     Total
+-----------+----------------------+----------
+         2 |<span class=result>       137        141 </span>|<span class=result>       278 </span>
+<span class=result>           </span>|<span class=result>     95.80      95.27 </span>|<span class=result>     95.53 </span>
+-----------+----------------------+----------
+         3 |<span class=result>         5          5 </span>|<span class=result>        10 </span>
+<span class=result>           </span>|<span class=result>      3.50       3.38 </span>|<span class=result>      3.44 </span>
+-----------+----------------------+----------
+         4 |<span class=result>         1          2 </span>|<span class=result>         3 </span>
+<span class=result>           </span>|<span class=result>      0.70       1.35 </span>|<span class=result>      1.03 </span>
+-----------+----------------------+----------
+     Total |<span class=result>       143        148 </span>|<span class=result>       291 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab donor_score y_tx if organ_code==3 &amp; y_tx&gt;=2008,  col</span>
+no observations
+<br><br>
+<span class=input>. tab hbs_ag_score y_tx if organ_code==3 &amp; y_tx&gt;=2008,  col</span>
+no observations
+<br><br>
+<span class=input>. tab anti_hcv_score y_tx if organ_code==3 &amp; y_tx&gt;=2008,  col</span>
+no observations
+<br><br>
+<span class=input>. label values cond_level cond_l_kidney</span>
+<br><br>
+<span class=input>. tab cond_level y_tx if organ_code==3 &amp; y_tx&gt;=2007,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+cond_level |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+     Valid |<span class=result>        77        144        148 </span>|<span class=result>       369 </span>
+<span class=result>           </span>|<span class=result>     97.47     100.00     100.00 </span>|<span class=result>     99.46 </span>
+-----------+---------------------------------+----------
+      Void |<span class=result>         2          0          0 </span>|<span class=result>         2 </span>
+<span class=result>           </span>|<span class=result>      2.53       0.00       0.00 </span>|<span class=result>      0.54 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        79        144        148 </span>|<span class=result>       371 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Lung</span>
+<span class=input>. tabstat transplant_date if organ_code==4, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  transp~e
+---------+----------
+     min |<span class=result>2007-09-26</span>
+     max |<span class=result>2009-10-20</span>
+--------------------
+<br><br>
+<span class=input>. tab area_code y_tx if organ_code==4,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+ area_code |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+     North |<span class=result>         2          1          2 </span>|<span class=result>         5 </span>
+<span class=result>           </span>|<span class=result>    100.00      33.33      50.00 </span>|<span class=result>     55.56 </span>
+-----------+---------------------------------+----------
+       Mid |<span class=result>         0          1          0 </span>|<span class=result>         1 </span>
+<span class=result>           </span>|<span class=result>      0.00      33.33       0.00 </span>|<span class=result>     11.11 </span>
+-----------+---------------------------------+----------
+     South |<span class=result>         0          1          2 </span>|<span class=result>         3 </span>
+<span class=result>           </span>|<span class=result>      0.00      33.33      50.00 </span>|<span class=result>     33.33 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>         2          3          4 </span>|<span class=result>         9 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab mv y_tx if organ_code==4,  col</span>
+no observations
+<br><br>
+<span class=input>. label values cond_level cond_l_lung</span>
+<br><br>
+<span class=input>. tab cond_level y_tx if organ_code==4,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+cond_level |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+   Stat-1B |<span class=result>         0          2          3 </span>|<span class=result>         5 </span>
+<span class=result>           </span>|<span class=result>      0.00      66.67      75.00 </span>|<span class=result>     55.56 </span>
+-----------+---------------------------------+----------
+    Stat-2 |<span class=result>         2          1          1 </span>|<span class=result>         4 </span>
+<span class=result>           </span>|<span class=result>    100.00      33.33      25.00 </span>|<span class=result>     44.44 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>         2          3          4 </span>|<span class=result>         9 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Pancreas</span>
+<span class=input>. tabstat transplant_date if organ_code==5, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  transp~e
+---------+----------
+     min |<span class=result>2008-07-23</span>
+     max |<span class=result>2009-10-21</span>
+--------------------
+<br><br>
+<span class=input>. tabstat score if organ_code==5, by(y_tx) stat(n mean sd med min max) format(%9.2g)</span>
+<br><br>
+Summary for variables: score
+     by categories of: y_tx 
+<br><br>
+    y_tx |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2008 | <span class=result>        6       5.1       2.8       4.5         2         9</span>
+    2009 | <span class=result>        9       5.6         3         7         2         9</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>       15       5.4       2.8         6         2         9</span>
+----------------------------------------------------------------------
+<br><br>
+<span class=input>. tab waittime_score y_tx if organ_code==5, col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+waittime_s |         y_tx
+      core |      2008       2009 |     Total
+-----------+----------------------+----------
+         0 |<span class=result>         5          6 </span>|<span class=result>        11 </span>
+<span class=result>           </span>|<span class=result>     83.33      66.67 </span>|<span class=result>     73.33 </span>
+-----------+----------------------+----------
+        .5 |<span class=result>         1          2 </span>|<span class=result>         3 </span>
+<span class=result>           </span>|<span class=result>     16.67      22.22 </span>|<span class=result>     20.00 </span>
+-----------+----------------------+----------
+         1 |<span class=result>         0          1 </span>|<span class=result>         1 </span>
+<span class=result>           </span>|<span class=result>      0.00      11.11 </span>|<span class=result>      6.67 </span>
+-----------+----------------------+----------
+     Total |<span class=result>         6          9 </span>|<span class=result>        15 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab hla_score y_tx if organ_code==5,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |         y_tx
+ hla_score |      2008       2009 |     Total
+-----------+----------------------+----------
+         4 |<span class=result>         2          1 </span>|<span class=result>         3 </span>
+<span class=result>           </span>|<span class=result>     66.67      20.00 </span>|<span class=result>     37.50 </span>
+-----------+----------------------+----------
+         6 |<span class=result>         1          4 </span>|<span class=result>         5 </span>
+<span class=result>           </span>|<span class=result>     33.33      80.00 </span>|<span class=result>     62.50 </span>
+-----------+----------------------+----------
+     Total |<span class=result>         3          5 </span>|<span class=result>         8 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab age_score y_tx if organ_code==5,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |         y_tx
+ age_score |      2008       2009 |     Total
+-----------+----------------------+----------
+         2 |<span class=result>         6          8 </span>|<span class=result>        14 </span>
+<span class=result>           </span>|<span class=result>    100.00      88.89 </span>|<span class=result>     93.33 </span>
+-----------+----------------------+----------
+         3 |<span class=result>         0          1 </span>|<span class=result>         1 </span>
+<span class=result>           </span>|<span class=result>      0.00      11.11 </span>|<span class=result>      6.67 </span>
+-----------+----------------------+----------
+     Total |<span class=result>         6          9 </span>|<span class=result>        15 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab blood_score y_tx if organ_code==5,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+blood_scor |         y_tx
+         e |      2008       2009 |     Total
+-----------+----------------------+----------
+         1 |<span class=result>         6          4 </span>|<span class=result>        10 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+----------------------+----------
+     Total |<span class=result>         6          4 </span>|<span class=result>        10 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab hbs_ag_score y_tx if organ_code==5,  col</span>
+no observations
+<br><br>
+<span class=input>. tab anti_hcv_score y_tx if organ_code==5,  col</span>
+no observations
+<br><br>
+<span class=input>. label values cond_level cond_l_pancreas</span>
+<br><br>
+<span class=input>. tab cond_level y_tx if organ_code==5,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |         y_tx
+cond_level |      2008       2009 |     Total
+-----------+----------------------+----------
+     Valid |<span class=result>         6          9 </span>|<span class=result>        15 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+----------------------+----------
+     Total |<span class=result>         6          9 </span>|<span class=result>        15 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. </span>
+<span class=input>. * Cornea</span>
+<span class=input>. tabstat transplant_date if organ_code==6, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  transp~e
+---------+----------
+     min |<span class=result>2007-08-23</span>
+     max |<span class=result>2009-10-25</span>
+--------------------
+<br><br>
+<span class=input>. label values cond_level cond_l_cornea</span>
+<br><br>
+<span class=input>. tab cond_level y_tx if organ_code==6,  col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |               y_tx
+cond_level |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         ? |<span class=result>        29        160        192 </span>|<span class=result>       381 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>        29        160        192 </span>|<span class=result>       381 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

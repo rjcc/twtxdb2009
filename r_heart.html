@@ -1,0 +1,428 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables:</span>
+<span class=input>. *   Recipient</span>
+<span class=input>. *     Request: y organ age sex pat_btype hepatitis cancer</span>
+<span class=input>. *     Date: write_date graft_date pat_pat_birthday chase_date </span>
+<span class=input>. *     Date2: die_date lossfu_date pacemaker_date coronary_date cancer_date</span>
+<span class=input>. *     OPO: trace_hosp_code writer_hosp_code graft_hosp_code</span>
+<span class=input>. *     Basic: pat_btype pat_sex pat_ht pat_wt (age)</span>
+<span class=input>. *     Op: op_type totalischemic_time</span>
+<span class=input>. *     Outcome: die_relation die_cause graft_organ_status complication_flag </span>
+<span class=input>. *         case_condi pacemaker coronary cancer</span>
+<span class=input>. *     Donor: dnr_id_no</span>
+<span class=input>. </span>
+<span class=input>. tabstat graft_date, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  graft~te
+---------+----------
+     min |<span class=result>1990-01-07</span>
+     max |<span class=result>2009-10-23</span>
+--------------------
+<br><br>
+<span class=input>. misstable summarize _all</span>
+                                                               Obs&lt;.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs&gt;.     Obs&lt;.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+  die_relation |<span class=result>       712</span>          <span class=result>       119</span>  |      2          0           1
+     die_cause |<span class=result>       797</span>          <span class=result>        34</span>  |      6          1           6
+  complicati~g |<span class=result>        88</span>          <span class=result>       743</span>  |      2          0           1
+       op_type |<span class=result>       612</span>          <span class=result>       219</span>  |      4          0           3
+  totalische~e |<span class=result>       611</span>          <span class=result>       220</span>  |     39          0         267
+   lossfu_date |<span class=result>       831</span>          <span class=result>         0</span>  |      0          .           .
+     pacemaker |<span class=result>       707</span>          <span class=result>       124</span>  |      2          0           1
+      coronary |<span class=result>       706</span>          <span class=result>       125</span>  |      2          0           1
+  cancer_cause |<span class=result>       828</span>          <span class=result>         3</span>  |      2          3           4
+          nyha |<span class=result>       785</span>          <span class=result>        46</span>  |      5          0           4
+        pat_ht |<span class=result>       118</span>          <span class=result>       713</span>  |     48          0         184
+        pat_wt |<span class=result>       118</span>          <span class=result>       713</span>  |    108          0         114
+     pat_btype |<span class=result>       190</span>          <span class=result>       641</span>  |      4          1           4
+       pat_sex |<span class=result>       189</span>          <span class=result>       642</span>  |      2          1           2
+  pat_birthday |<span class=result>         4</span>          <span class=result>       827</span>  |   &gt;500     -37152       16670
+      die_date |<span class=result>       705</span>          <span class=result>       126</span>  |    118      15205       18158
+           age |<span class=result>         4</span>          <span class=result>       827</span>  |   &gt;500   2.387471    149.5893
+  -----------------------------------------------------------------------------
+<br><br>
+<span class=input>. tab y</span>
+<br><br>
+<span class=result>          </span>y |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       1990 |<span class=result>          1        0.12        0.12</span>
+       1991 |<span class=result>          6        0.72        0.84</span>
+       1992 |<span class=result>          9        1.08        1.93</span>
+       1993 |<span class=result>         19        2.29        4.21</span>
+       1994 |<span class=result>         11        1.32        5.54</span>
+       1995 |<span class=result>         11        1.32        6.86</span>
+       1996 |<span class=result>         20        2.41        9.27</span>
+       1997 |<span class=result>         35        4.21       13.48</span>
+       1998 |<span class=result>         32        3.85       17.33</span>
+       1999 |<span class=result>         28        3.37       20.70</span>
+       2000 |<span class=result>         26        3.13       23.83</span>
+       2001 |<span class=result>         37        4.45       28.28</span>
+       2002 |<span class=result>         22        2.65       30.93</span>
+       2003 |<span class=result>         55        6.62       37.55</span>
+       2004 |<span class=result>         70        8.42       45.97</span>
+       2005 |<span class=result>         85       10.23       56.20</span>
+       2006 |<span class=result>         95       11.43       67.63</span>
+       2007 |<span class=result>         91       10.95       78.58</span>
+       2008 |<span class=result>         95       11.43       90.01</span>
+       2009 |<span class=result>         83        9.99      100.00</span>
+------------+-----------------------------------
+      Total |<span class=result>        831      100.00</span>
+<br><br>
+<span class=input>. tabstat graft_date if y&gt;=2004, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  graft~te
+---------+----------
+     min |<span class=result>2004-01-01</span>
+     max |<span class=result>2009-10-23</span>
+--------------------
+<br><br>
+<span class=input>. tab pat_sex y if y&gt;=2004, col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+   pat_sex |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         M |<span class=result>        53         64         68         74         78         65 </span>|<span class=result>       402 </span>
+<span class=result>           </span>|<span class=result>     80.30      78.05      77.27      84.09      82.11      78.31 </span>|<span class=result>     80.08 </span>
+-----------+------------------------------------------------------------------+----------
+         F |<span class=result>        13         18         20         14         17         18 </span>|<span class=result>       100 </span>
+<span class=result>           </span>|<span class=result>     19.70      21.95      22.73      15.91      17.89      21.69 </span>|<span class=result>     19.92 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        66         82         88         88         95         83 </span>|<span class=result>       502 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tabstat age if y&gt;=2004, by(y) stat(n mean sd med min max) format(%9.2g)</span>
+<br><br>
+Summary for variables: age
+     by categories of: y 
+<br><br>
+       y |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2004 | <span class=result>       69        50        17        55        10        73</span>
+    2005 | <span class=result>       85        49        13        49        11        70</span>
+    2006 | <span class=result>       94        51        18        55       4.8       150</span>
+    2007 | <span class=result>       89        47        17        51       2.4        71</span>
+    2008 | <span class=result>       95        45        15        48       6.3        68</span>
+    2009 | <span class=result>       83        49        13        49       9.7        75</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      515        48        15        51       2.4       150</span>
+----------------------------------------------------------------------
+<br><br>
+<span class=input>. tab pat_btype y if y&gt;=2004, col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+ pat_btype |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         O |<span class=result>        16         26         28         25         31         27 </span>|<span class=result>       153 </span>
+<span class=result>           </span>|<span class=result>     24.24      31.71      31.82      28.41      32.63      32.53 </span>|<span class=result>     30.48 </span>
+-----------+------------------------------------------------------------------+----------
+         A |<span class=result>        23         24         35         27         35         29 </span>|<span class=result>       173 </span>
+<span class=result>           </span>|<span class=result>     34.85      29.27      39.77      30.68      36.84      34.94 </span>|<span class=result>     34.46 </span>
+-----------+------------------------------------------------------------------+----------
+         B |<span class=result>        18         24         20         28         21         22 </span>|<span class=result>       133 </span>
+<span class=result>           </span>|<span class=result>     27.27      29.27      22.73      31.82      22.11      26.51 </span>|<span class=result>     26.49 </span>
+-----------+------------------------------------------------------------------+----------
+        AB |<span class=result>         9          8          5          8          8          5 </span>|<span class=result>        43 </span>
+<span class=result>           </span>|<span class=result>     13.64       9.76       5.68       9.09       8.42       6.02 </span>|<span class=result>      8.57 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        66         82         88         88         95         83 </span>|<span class=result>       502 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab cancer y if y&gt;=2004, col missing</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    cancer |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>         1          0          1          1          0          0 </span>|<span class=result>         3 </span>
+<span class=result>           </span>|<span class=result>      1.43       0.00       1.05       1.10       0.00       0.00 </span>|<span class=result>      0.58 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>        27         25         18          7          0          0 </span>|<span class=result>        77 </span>
+<span class=result>           </span>|<span class=result>     38.57      29.41      18.95       7.69       0.00       0.00 </span>|<span class=result>     14.84 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>        42         60         76         83         95         83 </span>|<span class=result>       439 </span>
+<span class=result>           </span>|<span class=result>     60.00      70.59      80.00      91.21     100.00     100.00 </span>|<span class=result>     84.59 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        70         85         95         91         95         83 </span>|<span class=result>       519 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab graft_organ_status y if y&gt;=2004, col missing</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+graft_orga |                                 y
+  n_status |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+      Good |<span class=result>        44         62         88         86         73         47 </span>|<span class=result>       400 </span>
+<span class=result>           </span>|<span class=result>     62.86      72.94      92.63      94.51      76.84      56.63 </span>|<span class=result>     77.07 </span>
+-----------+------------------------------------------------------------------+----------
+Organ Fail |<span class=result>         5          1          4          5         12          3 </span>|<span class=result>        30 </span>
+<span class=result>           </span>|<span class=result>      7.14       1.18       4.21       5.49      12.63       3.61 </span>|<span class=result>      5.78 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>        21         22          3          0         10         33 </span>|<span class=result>        89 </span>
+<span class=result>           </span>|<span class=result>     30.00      25.88       3.16       0.00      10.53      39.76 </span>|<span class=result>     17.15 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        70         85         95         91         95         83 </span>|<span class=result>       519 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab case_condi y if y&gt;=2004, col missing</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+case_condi |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+     Alive |<span class=result>        40         55         67         62         69         41 </span>|<span class=result>       334 </span>
+<span class=result>           </span>|<span class=result>     57.14      64.71      70.53      68.13      72.63      49.40 </span>|<span class=result>     64.35 </span>
+-----------+------------------------------------------------------------------+----------
+      Dead |<span class=result>        26         25         15         20         16          9 </span>|<span class=result>       111 </span>
+<span class=result>           </span>|<span class=result>     37.14      29.41      15.79      21.98      16.84      10.84 </span>|<span class=result>     21.39 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>         4          5         13          9         10         33 </span>|<span class=result>        74 </span>
+<span class=result>           </span>|<span class=result>      5.71       5.88      13.68       9.89      10.53      39.76 </span>|<span class=result>     14.26 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        70         85         95         91         95         83 </span>|<span class=result>       519 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. gen die=1 if die_date!=.</span>
+(705 missing values generated)
+<br><br>
+<span class=input>. replace die=0 if die_date==.</span>
+(705 real changes made)
+<br><br>
+<span class=input>. gen fu_die=die_date-graft_date if die==1</span>
+(705 missing values generated)
+<br><br>
+<span class=input>. replace fu_die=today-graft_date if die==0</span>
+(705 real changes made)
+<br><br>
+<span class=input>. </span>
+<span class=input>. stset fu_die, failure(die==1) scale (30)</span>
+<br><br>
+<span class=result>     </span>failure event:  <span class=result>die == 1</span>
+obs. time interval:  <span class=result>(0, fu_die]</span>
+ exit on or before:  <span class=result>failure</span>
+<span class=result>    </span>t for analysis:  <span class=result>time/30</span>
+<br><br>
+------------------------------------------------------------------------------
+<span class=result>      831</span>  total obs.
+<span class=result>        3</span>  obs. end on or before enter()
+------------------------------------------------------------------------------
+<span class=result>      828</span>  obs. remaining, representing
+<span class=result>      123</span>  failures in single record/single failure data
+<span class=result> 54098.07</span>  total analysis time at risk, at risk from t = <span class=result>        0</span>
+<span class=result>                             </span>earliest observed entry t = <span class=result>        0</span>
+<span class=result>                                  </span>last observed exit t = <span class=result> 241.1333</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. sts graph, ytitle(Proportion of Survival) ///</span>
+<span class=input>&gt;     ylabel(, angle(horizontal)) ///</span>
+<span class=input>&gt;     risktable censored(single) saving(km_heart_die, replace) ///</span>
+<span class=input>&gt;     xtitle(Month) xlabel(0 (24) 240) gwood ///</span>
+<span class=input>&gt;     title ("Heart: Kaplan-Meier Survival Curve")</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+(file km_heart_die.gph saved)
+(file km_heart_die.gph saved)
+<br><br>
+<span class=input>. graph export km_heart_die.pdf, replace</span>
+(file /Users/apple/Documents/rjcc2/txdb2009/km_heart_die.pdf written in PDF format)
+<br><br>
+<span class=input>. sts list, at(1 (24) 240)</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+              Beg.                      Survivor      Std.
+    Time     Total     Fail             Function     Error     [95% Conf. Int.]
+-------------------------------------------------------------------------------
+       1  <span class=result>     790       28              0.9661    0.0063     0.9512    0.9764</span>
+      25  <span class=result>     588       44              0.9082    0.0104     0.8857    0.9265</span>
+      49  <span class=result>     411       21              0.8721    0.0126     0.8451    0.8947</span>
+      73  <span class=result>     288        8              0.8523    0.0142     0.8221    0.8777</span>
+      97  <span class=result>     223        7              0.8285    0.0164     0.7936    0.8580</span>
+     121  <span class=result>     163        4              0.8099    0.0185     0.7705    0.8432</span>
+     145  <span class=result>     108        3              0.7916    0.0209     0.7471    0.8292</span>
+     169  <span class=result>      52        3              0.7662    0.0250     0.7128    0.8110</span>
+     193  <span class=result>      31        3              0.7127    0.0378     0.6312    0.7794</span>
+     217  <span class=result>       6        2              0.6074    0.0770     0.4402    0.7387</span>
+-------------------------------------------------------------------------------
+Note:  survivor function is calculated over full data and evaluated at
+       indicated times; it is not calculated from aggregates shown at left.
+<br><br>
+<span class=input>. </span>
+<span class=input>. ren graft_hosp_code hosp_code</span>
+<br><br>
+<span class=input>. merge m:1 hosp_code using hosp_code</span>
+<br><br>
+    Result                           # of obs.
+    -----------------------------------------
+    not matched              <span class=result>              19</span>
+        from master          <span class=result>               2</span>  (_merge==1)
+        from using           <span class=result>              17</span>  (_merge==2)
+<br><br>
+    matched                  <span class=result>             829</span>  (_merge==3)
+    -----------------------------------------
+<br><br>
+<span class=input>. drop if _merge!=3</span>
+(19 observations deleted)
+<br><br>
+<span class=input>. tab opo</span>
+<br><br>
+<span class=result>        </span>opo |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |<span class=result>         15        1.81        1.81</span>
+          2 |<span class=result>         32        3.86        5.67</span>
+          4 |<span class=result>         41        4.95       10.62</span>
+          5 |<span class=result>         76        9.17       19.78</span>
+          6 |<span class=result>        320       38.60       58.38</span>
+          7 |<span class=result>          1        0.12       58.50</span>
+          8 |<span class=result>         32        3.86       62.36</span>
+          9 |<span class=result>        309       37.27       99.64</span>
+         10 |<span class=result>          3        0.36      100.00</span>
+------------+-----------------------------------
+      Total |<span class=result>        829      100.00</span>
+<br><br>
+<span class=input>. keep if opo==6 | opo==9</span>
+(200 observations deleted)
+<br><br>
+<span class=input>. sts graph, ytitle(Proportion of Survival) ///</span>
+<span class=input>&gt;     ylabel(, angle(horizontal)) ///</span>
+<span class=input>&gt;     saving(km_heart_die_opo, replace) ///</span>
+<span class=input>&gt;     xtitle(Month) xlabel(0 (24) 240) by(opo) ///</span>
+<span class=input>&gt;     title ("Heart: Kaplan-Meier Survival Curve") risktable</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+(file km_heart_die_opo.gph saved)
+(file km_heart_die_opo.gph saved)
+<br><br>
+<span class=input>. graph export km_heart_die_opo.pdf, replace</span>
+(file /Users/apple/Documents/rjcc2/txdb2009/km_heart_die_opo.pdf written in PDF format)
+<br><br>
+<span class=input>. xi: stcox i.opo </span>
+i.opo             _Iopo_6-9           (naturally coded; _Iopo_6 omitted)
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-429.90462</span>
+Iteration 1:   log likelihood = <span class=result>-429.26574</span>
+Iteration 2:   log likelihood = <span class=result>-429.26571</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-429.26571</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>         629                     </span>Number of obs   =<span class=result>       629</span>
+No. of failures = <span class=result>          74</span>
+Time at risk    = <span class=result> 44565.86667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      1.28</span>
+Log likelihood  =   <span class=result>-429.26571                     </span>Prob &gt; chi2     =<span class=result>    0.2583</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     _Iopo_9 |<span class=result>   1.306058   .3086087     1.13   0.258     .8219239    2.075358</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. sts list, at(1 (24) 240) compare by(opo)</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+<span class=result>                 </span>Survivor Function
+opo                   6          9
+----------------------------------
+time       1<span class=result>     0.9780     0.9903</span>
+          25<span class=result>     0.9258     0.9586</span>
+          49<span class=result>     0.9045     0.9073</span>
+          73<span class=result>     0.8929     0.8811</span>
+          97<span class=result>     0.8780     0.8396</span>
+         121<span class=result>     0.8597     0.8131</span>
+         145<span class=result>     0.8481     0.7917</span>
+         169<span class=result>     0.8481     0.7341</span>
+         193<span class=result>     0.8178     0.5244</span>
+         217<span class=result>     0.7156          .</span>
+----------------------------------
+<br><br>
+<span class=input>. xi: sts test i.opo</span>
+i.opo             _Iopo_6-9           (naturally coded; _Iopo_6 omitted)
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+<br><br>
+<span class=result><u>Log-rank test for equality of survivor functions</u></span>
+<br><br>
+        |   Events         Events
+_Iopo_9 |  observed       expected
+--------+-------------------------
+0       |<span class=result>        36          40.78</span>
+1       |<span class=result>        38          33.22</span>
+--------+-------------------------
+Total   |<span class=result>        74          74.00</span>
+<br><br>
+<span class=result>              </span>chi2(1) = <span class=result>      1.28</span>
+<span class=result>              </span>Pr&gt;chi2 = <span class=result>    0.2571</span>
+<br><br>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

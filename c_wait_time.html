@@ -1,0 +1,517 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables:</span>
+<span class=input>. *   Candidates all-included, not only transplanted</span>
+<span class=input>. *      organ_code 1st_login_date-&gt;exit_date exit_reason</span>
+<span class=input>. * Plans: Tabulate wait_time</span>
+<span class=input>. *   Strata: organ_code exit_reason</span>
+<span class=input>. *   cmvigg cmvigm pra</span>
+<span class=input>. </span>
+<span class=input>. </span>
+<span class=input>. ren first_login_date list_date</span>
+<br><br>
+<span class=input>. tabstat list_date, stat(min max) format(%dCY-N-D) col(var)</span>
+<br><br>
+   stats |  list_d~e
+---------+----------
+     min |<span class=result>2004-01-01</span>
+     max |<span class=result>2009-10-28</span>
+--------------------
+<br><br>
+<span class=input>. display "Up to 2009-10-28"</span>
+<span class=result>Up to 2009-10-28</span>
+<br><br>
+<span class=input>. bysort organ_code: tabstat wait_time, by(y) stat(n mean sd med) format(%9.2g)</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+Summary for variables: wait_time
+     by categories of: y 
+<br><br>
+       y |         N      mean        sd       p50
+---------+----------------------------------------
+    2004 | <span class=result>      158       576       699       231</span>
+    2005 | <span class=result>      193       446       615       126</span>
+    2006 | <span class=result>      160       440       516       121</span>
+    2007 | <span class=result>      203       307       348       121</span>
+    2008 | <span class=result>      185       213       215       116</span>
+    2009 | <span class=result>      176        96        89        68</span>
+---------+----------------------------------------
+   Total | <span class=result>     1075       340       485       113</span>
+--------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+Summary for variables: wait_time
+     by categories of: y 
+<br><br>
+       y |         N      mean        sd       p50
+---------+----------------------------------------
+    2004 | <span class=result>      384       483       657       163</span>
+    2005 | <span class=result>      523       487       601       145</span>
+    2006 | <span class=result>      662       486       500       236</span>
+    2007 | <span class=result>      785       404       371       264</span>
+    2008 | <span class=result>      787       263       220       235</span>
+    2009 | <span class=result>      807       105        87        77</span>
+---------+----------------------------------------
+   Total | <span class=result>     3948       347       438       147</span>
+--------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+Summary for variables: wait_time
+     by categories of: y 
+<br><br>
+       y |         N      mean        sd       p50
+---------+----------------------------------------
+    2004 | <span class=result>     1208      1430       674      1813</span>
+    2005 | <span class=result>     1715      1244       501      1478</span>
+    2006 | <span class=result>     1191      1025       355      1142</span>
+    2007 | <span class=result>     1163       744       239       797</span>
+    2008 | <span class=result>     1220       444       139       450</span>
+    2009 | <span class=result>     1171       145        84       142</span>
+---------+----------------------------------------
+   Total | <span class=result>     7668       868       597       821</span>
+--------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+Summary for variables: wait_time
+     by categories of: y 
+<br><br>
+       y |         N      mean        sd       p50
+---------+----------------------------------------
+    2004 | <span class=result>       28       647       655       465</span>
+    2005 | <span class=result>       24       412       539       157</span>
+    2006 | <span class=result>       33       762       542      1089</span>
+    2007 | <span class=result>       31       518       397       670</span>
+    2008 | <span class=result>       39       285       221       328</span>
+    2009 | <span class=result>       18       132        95       104</span>
+---------+----------------------------------------
+   Total | <span class=result>      173       478       492       328</span>
+--------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+Summary for variables: wait_time
+     by categories of: y 
+<br><br>
+       y |         N      mean        sd       p50
+---------+----------------------------------------
+    2004 | <span class=result>        8      1952       130      1975</span>
+    2005 | <span class=result>        8      1473       214      1554</span>
+    2006 | <span class=result>        8      1113       107      1108</span>
+    2007 | <span class=result>       29       764       168       786</span>
+    2008 | <span class=result>       42       386       140       396</span>
+    2009 | <span class=result>       35       143        90       164</span>
+---------+----------------------------------------
+   Total | <span class=result>      130       613       522       455</span>
+--------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+Summary for variables: wait_time
+     by categories of: y 
+<br><br>
+       y |         N      mean        sd       p50
+---------+----------------------------------------
+    2004 | <span class=result>       13      1621       340      1536</span>
+    2005 | <span class=result>       20      1320       282      1435</span>
+    2006 | <span class=result>      101       853       309       881</span>
+    2007 | <span class=result>      471       414       283       376</span>
+    2008 | <span class=result>      681       247       189       200</span>
+    2009 | <span class=result>      516       102        78        89</span>
+---------+----------------------------------------
+   Total | <span class=result>     1802       305       316       190</span>
+--------------------------------------------------
+<br><br>
+<span class=input>. bysort organ_code: tabstat wait_time, by(exit_reason) stat(n mean sd med) format(%9.2g)</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+Summary for variables: wait_time
+     by categories of: exit_reason 
+<br><br>
+exit_reason |         N      mean        sd       p50
+------------+----------------------------------------
+       Dead | <span class=result>      273       158       308        30</span>
+    Loss FU | <span class=result>        7       462       309       449</span>
+ Transplant | <span class=result>      419       171       250        68</span>
+ Pt-Refusal | <span class=result>       13       301       290       200</span>
+        C/I | <span class=result>       52       235       389        71</span>
+     Others | <span class=result>       23       251       379        41</span>
+------------+----------------------------------------
+      Total | <span class=result>      787       177       289        53</span>
+-----------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+Summary for variables: wait_time
+     by categories of: exit_reason 
+<br><br>
+exit_reason |         N      mean        sd       p50
+------------+----------------------------------------
+       Dead | <span class=result>      974       156       238        60</span>
+    Loss FU | <span class=result>       87       729       489       654</span>
+ Transplant | <span class=result>     1185       159       253        64</span>
+ Pt-Refusal | <span class=result>       47       344       285       291</span>
+        C/I | <span class=result>      135       333       401       180</span>
+     Others | <span class=result>       65       234       331        70</span>
+------------+----------------------------------------
+      Total | <span class=result>     2493       193       294        72</span>
+-----------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+Summary for variables: wait_time
+     by categories of: exit_reason 
+<br><br>
+exit_reason |         N      mean        sd       p50
+------------+----------------------------------------
+       Dead | <span class=result>      204       630       458       496</span>
+    Loss FU | <span class=result>      487      1045       383       986</span>
+ Transplant | <span class=result>     1072       490       459       352</span>
+ Pt-Refusal | <span class=result>      174       848       422       883</span>
+        C/I | <span class=result>       82       761       516       658</span>
+     Others | <span class=result>       76       455       360       387</span>
+------------+----------------------------------------
+      Total | <span class=result>     2095       672       496       628</span>
+-----------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+Summary for variables: wait_time
+     by categories of: exit_reason 
+<br><br>
+exit_reason |         N      mean        sd       p50
+------------+----------------------------------------
+       Dead | <span class=result>       59       311       423        93</span>
+    Loss FU | <span class=result>        1       182         .       182</span>
+ Transplant | <span class=result>       38       218       231       125</span>
+ Pt-Refusal | <span class=result>        1         0         .         0</span>
+        C/I | <span class=result>        3       145        43       147</span>
+     Others | <span class=result>        4       661       540       663</span>
+------------+----------------------------------------
+      Total | <span class=result>      106       282       367       122</span>
+-----------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+Summary for variables: wait_time
+     by categories of: exit_reason 
+<br><br>
+exit_reason |         N      mean        sd       p50
+------------+----------------------------------------
+    Loss FU | <span class=result>        1       686         .       686</span>
+ Transplant | <span class=result>       25       512       391       518</span>
+        C/I | <span class=result>        3       364        26       356</span>
+------------+----------------------------------------
+      Total | <span class=result>       29       503       367       393</span>
+-----------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+Summary for variables: wait_time
+     by categories of: exit_reason 
+<br><br>
+exit_reason |         N      mean        sd       p50
+------------+----------------------------------------
+       Dead | <span class=result>       10       666       519       625</span>
+    Loss FU | <span class=result>       36       429       243       428</span>
+ Transplant | <span class=result>      898       214       243       133</span>
+ Pt-Refusal | <span class=result>      151       337       290       268</span>
+        C/I | <span class=result>       30       259       234       173</span>
+     Others | <span class=result>       38       372       354       239</span>
+------------+----------------------------------------
+      Total | <span class=result>     1163       247       266       154</span>
+-----------------------------------------------------
+<br><br>
+<span class=input>. gen wait_t=wait_time</span>
+(81 missing values generated)
+<br><br>
+<span class=input>. * All candidates</span>
+<span class=input>. forvalues i=1(1)6 {</span>
+  2<span class=input>.    disp "Organ=" `i'</span>
+  3<span class=input>.    pwcorrs pra wait_t if organ_code==`i', spearman sig star(0.05) obs</span>
+  4<span class=input>.    }</span>
+<span class=result>Organ=1</span>
+<span class=result>                           </span><span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>      388</span>
+          |
+   wait_t | <span class=result> -0.0510   1.0000 </span>
+          |<span class=result>   0.3169</span>
+          |<span class=result>      387     1075</span>
+          |
+Organ=2
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>     1636</span>
+          |
+   wait_t | <span class=result>  0.0088   1.0000 </span>
+          |<span class=result>   0.7208</span>
+          |<span class=result>     1636     3948</span>
+          |
+Organ=3
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>     5389</span>
+          |
+   wait_t | <span class=result> -0.1667*  1.0000 </span>
+          |<span class=result>   0.0000</span>
+          |<span class=result>     5389     7668</span>
+          |
+Organ=4
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>       61</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>       61      173</span>
+          |
+Organ=5
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      121</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      121      130</span>
+          |
+Organ=6
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>     1026</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>     1026     1802</span>
+          |
+<br><br>
+<span class=input>. * Candaidates that exited</span>
+<span class=input>. forvalues i=1(1)6 {</span>
+  2<span class=input>.    disp "Organ=" `i'</span>
+  3<span class=input>.    pwcorrs pra wait_t if organ_code==`i' &amp; exit_reason!=., spearman sig star(0.05) obs</span>
+  4<span class=input>.    }</span>
+<span class=result>Organ=1</span>
+<span class=result>                           </span><span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>      215</span>
+          |
+   wait_t | <span class=result> -0.0006   1.0000 </span>
+          |<span class=result>   0.9927</span>
+          |<span class=result>      214      787</span>
+          |
+Organ=2
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>      644</span>
+          |
+   wait_t | <span class=result>  0.0209   1.0000 </span>
+          |<span class=result>   0.5966</span>
+          |<span class=result>      644     2493</span>
+          |
+Organ=3
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>      554</span>
+          |
+   wait_t | <span class=result> -0.1664*  1.0000 </span>
+          |<span class=result>   0.0001</span>
+          |<span class=result>      554     2095</span>
+          |
+Organ=4
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>       20</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>       20      106</span>
+          |
+Organ=5
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>       25</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>       25       29</span>
+          |
+Organ=6
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      525</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      525     1163</span>
+          |
+<br><br>
+<span class=input>. * Candidates that had transplantation</span>
+<span class=input>. forvalues i=1(1)6 {</span>
+  2<span class=input>.    disp "Organ=" `i'</span>
+  3<span class=input>.    pwcorrs pra wait_t if organ_code==`i' &amp; exit_reason==3, spearman sig star(0.05) obs</span>
+  4<span class=input>.    }</span>
+<span class=result>Organ=1</span>
+<span class=result>                           </span><span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      121</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      121      419</span>
+          |
+Organ=2
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      318</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      318     1185</span>
+          |
+Organ=3
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>      270</span>
+          |
+   wait_t | <span class=result> -0.0671   1.0000 </span>
+          |<span class=result>   0.2719</span>
+          |<span class=result>      270     1072</span>
+          |
+Organ=4
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>        6</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>        6       38</span>
+          |
+Organ=5
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>       21</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>       21       25</span>
+          |
+Organ=6
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      416</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      416      898</span>
+          |
+<br><br>
+<span class=input>. </span>
+<span class=input>. </span>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

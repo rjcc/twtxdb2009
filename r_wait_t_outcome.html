@@ -1,0 +1,1579 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables:</span>
+<span class=input>. *   Recipient</span>
+<span class=input>. *     wait_t pra cmvigg cmvigm graft_date die_date</span>
+<span class=input>. *     source: donor as cadaver or living</span>
+<span class=input>. *     confine: Taiwan or Outside-Taiwan</span>
+<span class=input>. * Plans:</span>
+<span class=input>. *     Variables: wait_t pra cmv </span>
+<span class=input>. *                ldonor outside (liver kidney cornea)</span>
+<span class=input>. *     Outcome: patient death</span>
+<span class=input>. tabstat graft_date, stat(min max) format(%dCY-N-D) col(var)</span>
+<br><br>
+   stats |  graft_~e
+---------+----------
+     min |<span class=result>2004-01-01</span>
+     max |<span class=result>2009-10-28</span>
+--------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Donor: cadaver vs living</span>
+<span class=input>. bysort organ_code: tab source y, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    source |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+   Cadaver |<span class=result>        40         74         62         71         80         75 </span>|<span class=result>       402 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        40         74         62         71         80         75 </span>|<span class=result>       402 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    source |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+   Cadaver |<span class=result>        35         93         95        146        127         80 </span>|<span class=result>       576 </span>
+<span class=result>           </span>|<span class=result>     48.61      51.38      54.60      58.63      48.29      39.60 </span>|<span class=result>     50.48 </span>
+-----------+------------------------------------------------------------------+----------
+    Living |<span class=result>        37         88         79        103        136        122 </span>|<span class=result>       565 </span>
+<span class=result>           </span>|<span class=result>     51.39      48.62      45.40      41.37      51.71      60.40 </span>|<span class=result>     49.52 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        72        181        174        249        263        202 </span>|<span class=result>     1,141 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    source |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+   Cadaver |<span class=result>        53        120        143        147        171        156 </span>|<span class=result>       790 </span>
+<span class=result>           </span>|<span class=result>     86.89      76.92      84.12      84.48      78.44      72.90 </span>|<span class=result>     79.56 </span>
+-----------+------------------------------------------------------------------+----------
+    Living |<span class=result>         8         36         27         27         47         58 </span>|<span class=result>       203 </span>
+<span class=result>           </span>|<span class=result>     13.11      23.08      15.88      15.52      21.56      27.10 </span>|<span class=result>     20.44 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        61        156        170        174        218        214 </span>|<span class=result>       993 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    source |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+   Cadaver |<span class=result>         5          6          8          6          6          4 </span>|<span class=result>        35 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5          6          8          6          6          4 </span>|<span class=result>        35 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+    source |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+   Cadaver |<span class=result>         1          1          1          2         11          9 </span>|<span class=result>        25 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         1          1          1          2         11          9 </span>|<span class=result>        25 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                      y
+    source |      2004       2007       2008       2009 |     Total
+-----------+--------------------------------------------+----------
+   Cadaver |<span class=result>         1         94        438        363 </span>|<span class=result>       896 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+--------------------------------------------+----------
+     Total |<span class=result>         1         94        438        363 </span>|<span class=result>       896 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. bysort organ_code: tab confine y, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+   confine |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+    Taiwan |<span class=result>        40         74         62         71         80         75 </span>|<span class=result>       402 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        40         74         62         71         80         75 </span>|<span class=result>       402 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+   confine |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+    Taiwan |<span class=result>        67        167        159        236        246        193 </span>|<span class=result>     1,068 </span>
+<span class=result>           </span>|<span class=result>     93.06      92.27      91.38      94.78      93.54      95.54 </span>|<span class=result>     93.60 </span>
+-----------+------------------------------------------------------------------+----------
+Outside-TW |<span class=result>         5         14         15         13         17          9 </span>|<span class=result>        73 </span>
+<span class=result>           </span>|<span class=result>      6.94       7.73       8.62       5.22       6.46       4.46 </span>|<span class=result>      6.40 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        72        181        174        249        263        202 </span>|<span class=result>     1,141 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+   confine |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+    Taiwan |<span class=result>        41        121        127        156        184        197 </span>|<span class=result>       826 </span>
+<span class=result>           </span>|<span class=result>     67.21      76.58      74.27      89.14      84.02      92.06 </span>|<span class=result>     82.77 </span>
+-----------+------------------------------------------------------------------+----------
+Outside-TW |<span class=result>        20         37         44         19         35         17 </span>|<span class=result>       172 </span>
+<span class=result>           </span>|<span class=result>     32.79      23.42      25.73      10.86      15.98       7.94 </span>|<span class=result>     17.23 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        61        158        171        175        219        214 </span>|<span class=result>       998 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+   confine |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+    Taiwan |<span class=result>         5          6          8          6          6          4 </span>|<span class=result>        35 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5          6          8          6          6          4 </span>|<span class=result>        35 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                                 y
+   confine |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+    Taiwan |<span class=result>         1          1          1          2         11          9 </span>|<span class=result>        25 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         1          1          1          2         11          9 </span>|<span class=result>        25 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                      y
+   confine |      2004       2007       2008       2009 |     Total
+-----------+--------------------------------------------+----------
+    Taiwan |<span class=result>         1         93        434        353 </span>|<span class=result>       881 </span>
+<span class=result>           </span>|<span class=result>    100.00      98.94      99.09      97.25 </span>|<span class=result>     98.33 </span>
+-----------+--------------------------------------------+----------
+Outside-TW |<span class=result>         0          1          4         10 </span>|<span class=result>        15 </span>
+<span class=result>           </span>|<span class=result>      0.00       1.06       0.91       2.75 </span>|<span class=result>      1.67 </span>
+-----------+--------------------------------------------+----------
+     Total |<span class=result>         1         94        438        363 </span>|<span class=result>       896 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. gen die=1 if die_date!=.</span>
+(3284 missing values generated)
+<br><br>
+<span class=input>. replace die=0 if die_date==.</span>
+(3284 real changes made)
+<br><br>
+<span class=input>. gen fu_die=die_date-graft_date if die==1</span>
+(3284 missing values generated)
+<br><br>
+<span class=input>. replace fu_die=today-graft_date if die==0</span>
+(3284 real changes made)
+<br><br>
+<span class=input>. </span>
+<span class=input>. forvalues i=1(1)6 {</span>
+  2<span class=input>.    disp "Organ=" `i'</span>
+  3<span class=input>.    pwcorrs pra wait_t if organ_code==`i', spearman sig star(0.05) obs</span>
+  4<span class=input>.    }</span>
+<span class=result>Organ=1</span>
+<span class=result>                           </span><span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      117</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      117      401</span>
+          |
+Organ=2
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      310</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      310     1140</span>
+          |
+Organ=3
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>  1.0000 </span>
+          |
+          |<span class=result>      260</span>
+          |
+   wait_t | <span class=result> -0.0726   1.0000 </span>
+          |<span class=result>   0.2437</span>
+          |<span class=result>      260      992</span>
+          |
+Organ=4
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>        6</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>        6       35</span>
+          |
+Organ=5
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>       15</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>       15       25</span>
+          |
+Organ=6
+                           <span class=result>Spearman Correlations</span>
+<br><br>
+          |      pra   wait_t
+----------+------------------
+      pra | <span class=result>       . </span>
+          |
+          |<span class=result>      415</span>
+          |
+   wait_t | <span class=result>       .   1.0000 </span>
+          |<span class=result>   1.0000</span>
+          |<span class=result>      415      895</span>
+          |
+<br><br>
+<span class=input>.    </span>
+<span class=input>. stset fu_die, failure(die==1) scale (30)</span>
+<br><br>
+<span class=result>     </span>failure event:  <span class=result>die == 1</span>
+obs. time interval:  <span class=result>(0, fu_die]</span>
+ exit on or before:  <span class=result>failure</span>
+<span class=result>    </span>t for analysis:  <span class=result>time/30</span>
+<br><br>
+------------------------------------------------------------------------------
+<span class=result>     3497</span>  total obs.
+<span class=result>        4</span>  obs. end on or before enter()
+------------------------------------------------------------------------------
+<span class=result>     3493</span>  obs. remaining, representing
+<span class=result>      210</span>  failures in single record/single failure data
+<span class=result> 81379.87</span>  total analysis time at risk, at risk from t = <span class=result>        0</span>
+<span class=result>                             </span>earliest observed entry t = <span class=result>        0</span>
+<span class=result>                                  </span>last observed exit t = <span class=result>     70.9</span>
+<br><br>
+<span class=input>. bysort organ_code: stcox wait_t</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-409.63733</span>
+Iteration 1:   log likelihood = <span class=result>-409.33275</span>
+Iteration 2:   log likelihood = <span class=result>-409.32748</span>
+Iteration 3:   log likelihood = <span class=result>-409.32747</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-409.32747</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>         401                     </span>Number of obs   =<span class=result>       401</span>
+No. of failures = <span class=result>          73</span>
+Time at risk    = <span class=result> 10776.56667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.62</span>
+Log likelihood  =   <span class=result>-409.32747                     </span>Prob &gt; chi2     =<span class=result>    0.4312</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   1.000396   .0004835     0.82   0.413     .9994483    1.001344</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-689.27214</span>
+Iteration 1:   log likelihood = <span class=result>-688.53676</span>
+Iteration 2:   log likelihood = <span class=result>-688.51351</span>
+Iteration 3:   log likelihood = <span class=result>-688.51348</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-688.51348</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>        1138                     </span>Number of obs   =<span class=result>      1138</span>
+No. of failures = <span class=result>         101</span>
+Time at risk    = <span class=result> 30336.13333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      1.52</span>
+Log likelihood  =   <span class=result>-688.51348                     </span>Prob &gt; chi2     =<span class=result>    0.2180</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   .9993938   .0005273    -1.15   0.250     .9983608    1.000428</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-137.71436</span>
+Iteration 1:   log likelihood = <span class=result>-137.67387</span>
+Iteration 2:   log likelihood = <span class=result>-137.67382</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-137.67382</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         991                     </span>Number of obs   =<span class=result>       991</span>
+No. of failures = <span class=result>          21</span>
+Time at risk    = <span class=result>     27654.4</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.08</span>
+Log likelihood  =   <span class=result>-137.67382                     </span>Prob &gt; chi2     =<span class=result>    0.7758</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   .9998426   .0005594    -0.28   0.778     .9987468     1.00094</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-46.872167</span>
+Iteration 1:   log likelihood = <span class=result>-46.818995</span>
+Iteration 2:   log likelihood = <span class=result>-46.818768</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-46.818768</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          34                     </span>Number of obs   =<span class=result>        34</span>
+No. of failures = <span class=result>          15</span>
+Time at risk    = <span class=result> 552.1333333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.11</span>
+Log likelihood  =   <span class=result>-46.818768                     </span>Prob &gt; chi2     =<span class=result>    0.7438</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   .9995551   .0013938    -0.32   0.750      .996827    1.002291</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          25                     </span>Number of obs   =<span class=result>        25</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 409.7666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         895                     </span>Number of obs   =<span class=result>       895</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 11293.83333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. bysort organ_code: stcox age</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-409.60101</span>
+Iteration 1:   log likelihood = <span class=result>-408.29748</span>
+Iteration 2:   log likelihood = <span class=result>-408.28994</span>
+Iteration 3:   log likelihood = <span class=result>-408.28994</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-408.28994</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>         401                     </span>Number of obs   =<span class=result>       401</span>
+No. of failures = <span class=result>          73</span>
+Time at risk    = <span class=result> 10772.13333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      2.62</span>
+Log likelihood  =   <span class=result>-408.28994                     </span>Prob &gt; chi2     =<span class=result>    0.1054</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |<span class=result>   1.014008   .0089664     1.57   0.116     .9965855    1.031735</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-689.27674</span>
+Iteration 1:   log likelihood = <span class=result>-689.25713</span>
+Iteration 2:   log likelihood = <span class=result>-689.25675</span>
+Iteration 3:   log likelihood = <span class=result>-689.25675</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-689.25675</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>        1138                     </span>Number of obs   =<span class=result>      1138</span>
+No. of failures = <span class=result>         101</span>
+Time at risk    = <span class=result> 30342.43333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.04</span>
+Log likelihood  =   <span class=result>-689.25675                     </span>Prob &gt; chi2     =<span class=result>    0.8415</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |<span class=result>   .9996005   .0021091    -0.19   0.850     .9954753    1.003743</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-137.88878</span>
+Iteration 1:   log likelihood = <span class=result>-135.50163</span>
+Iteration 2:   log likelihood = <span class=result>-135.46776</span>
+Iteration 3:   log likelihood = <span class=result>-135.46776</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-135.46776</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         997                     </span>Number of obs   =<span class=result>       997</span>
+No. of failures = <span class=result>          21</span>
+Time at risk    = <span class=result> 27921.56667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      4.84</span>
+Log likelihood  =   <span class=result>-135.46776                     </span>Prob &gt; chi2     =<span class=result>    0.0278</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |<span class=result>     1.0414   .0199456     2.12   0.034     1.003032    1.081236</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-46.872167</span>
+Iteration 1:   log likelihood = <span class=result>-46.867096</span>
+Iteration 2:   log likelihood = <span class=result>-46.867095</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-46.867095</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          34                     </span>Number of obs   =<span class=result>        34</span>
+No. of failures = <span class=result>          15</span>
+Time at risk    = <span class=result> 552.1333333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.01</span>
+Log likelihood  =   <span class=result>-46.867095                     </span>Prob &gt; chi2     =<span class=result>    0.9198</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |<span class=result>   .9974351   .0254072    -0.10   0.920     .9488606    1.048496</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          25                     </span>Number of obs   =<span class=result>        25</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 409.7666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         895                     </span>Number of obs   =<span class=result>       895</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 11287.36667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. bysort organ_code: stcox pra</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: pra omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>-64.046031</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-64.046031</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>         117                     </span>Number of obs   =<span class=result>       117</span>
+No. of failures = <span class=result>          14</span>
+Time at risk    = <span class=result>       790.7</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>-64.046031                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         pra |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: pra omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>-82.271785</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-82.271785</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         310                     </span>Number of obs   =<span class=result>       310</span>
+No. of failures = <span class=result>          15</span>
+Time at risk    = <span class=result> 2302.666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>-82.271785                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         pra |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-15.234771</span>
+Iteration 1:   log likelihood = <span class=result>-15.160841</span>
+Iteration 2:   log likelihood = <span class=result>-15.127582</span>
+Iteration 3:   log likelihood = <span class=result>-15.108639</span>
+Iteration 4:   log likelihood = <span class=result>-15.093676</span>
+Iteration 5:   log likelihood = <span class=result>-15.080321</span>
+Iteration 6:   log likelihood = <span class=result>-15.071525</span>
+Iteration 7:   log likelihood = <span class=result>-15.066501</span>
+Iteration 8:   log likelihood = <span class=result> -15.06381</span>
+Iteration 9:   log likelihood = <span class=result>-15.062522</span>
+Iteration 10:  log likelihood = <span class=result>-15.061959</span>
+Iteration 11:  log likelihood = <span class=result>-15.061726</span>
+Iteration 12:  log likelihood = <span class=result>-15.061633</span>
+Iteration 13:  log likelihood = <span class=result>-15.061597</span>
+Iteration 14:  log likelihood = <span class=result>-15.061583</span>
+Iteration 15:  log likelihood = <span class=result>-15.061578</span>
+Iteration 16:  log likelihood = <span class=result>-15.061576</span>
+Iteration 17:  log likelihood = <span class=result>-15.061576</span>
+Iteration 18:  log likelihood = <span class=result>-15.061575</span>
+Iteration 19:  log likelihood = <span class=result>-15.061575</span>
+Iteration 20:  log likelihood = <span class=result>-15.061575</span>
+Iteration 21:  log likelihood = <span class=result>-15.061575</span>
+Iteration 22:  log likelihood = <span class=result>-15.061575</span>
+Iteration 23:  log likelihood = <span class=result>-15.061575</span>
+Iteration 24:  log likelihood = <span class=result>-15.061575</span>
+Iteration 25:  log likelihood = <span class=result>-15.061575</span>
+Iteration 26:  log likelihood = <span class=result>-15.061575</span>
+Iteration 27:  log likelihood = <span class=result>-15.061575</span>
+Iteration 28:  log likelihood = <span class=result>-15.061575</span>
+Iteration 29:  log likelihood = <span class=result>-15.061575</span>
+Iteration 30:  log likelihood = <span class=result>-15.061575</span>
+Iteration 31:  log likelihood = <span class=result>-15.061575</span>
+Iteration 32:  log likelihood = <span class=result>-15.061575</span>
+Iteration 33:  log likelihood = <span class=result>-15.061575</span>
+Iteration 34:  log likelihood = <span class=result>-15.061575</span>
+Iteration 35:  log likelihood = <span class=result>-15.061575</span>
+Iteration 36:  log likelihood = <span class=result>-15.061575</span>
+Iteration 37:  log likelihood = <span class=result>-15.061575</span>
+Iteration 38:  log likelihood = <span class=result>-15.061575</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-15.061575</span>
+Iteration 1:   log likelihood = <span class=result>-15.061575</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         259                     </span>Number of obs   =<span class=result>       259</span>
+No. of failures = <span class=result>           4</span>
+Time at risk    = <span class=result> 1804.866667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.35</span>
+Log likelihood  =   <span class=result>-15.061575                     </span>Prob &gt; chi2     =<span class=result>    0.5562</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         pra |<span class=result>   8.17e-71   3.86e-62    -0.00   1.000            0           .</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: pra omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>           6                     </span>Number of obs   =<span class=result>         6</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result>        47.1</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         pra |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: pra omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          15                     </span>Number of obs   =<span class=result>        15</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 121.9666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         pra |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: pra omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         415                     </span>Number of obs   =<span class=result>       415</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 3043.066667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         pra |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. bysort organ_code: stcox cmvigg</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-71.649375</span>
+Iteration 1:   log likelihood = <span class=result>-69.934986</span>
+Iteration 2:   log likelihood = <span class=result>-69.395106</span>
+Iteration 3:   log likelihood = <span class=result>-69.206027</span>
+Iteration 4:   log likelihood = <span class=result>-69.137659</span>
+Iteration 5:   log likelihood = <span class=result>-69.112665</span>
+Iteration 6:   log likelihood = <span class=result>-69.103491</span>
+Iteration 7:   log likelihood = <span class=result>-69.100119</span>
+Iteration 8:   log likelihood = <span class=result>-69.098878</span>
+Iteration 9:   log likelihood = <span class=result>-69.098422</span>
+Iteration 10:  log likelihood = <span class=result>-69.098254</span>
+Iteration 11:  log likelihood = <span class=result>-69.098193</span>
+Iteration 12:  log likelihood = <span class=result> -69.09817</span>
+Iteration 13:  log likelihood = <span class=result>-69.098162</span>
+Iteration 14:  log likelihood = <span class=result>-69.098159</span>
+Iteration 15:  log likelihood = <span class=result>-69.098157</span>
+Iteration 16:  log likelihood = <span class=result>-69.098157</span>
+Iteration 17:  log likelihood = <span class=result>-69.098157</span>
+Iteration 18:  log likelihood = <span class=result>-69.098157</span>
+Iteration 19:  log likelihood = <span class=result>-69.098157</span>
+Iteration 20:  log likelihood = <span class=result>-69.098157</span>
+Iteration 21:  log likelihood = <span class=result>-69.098157</span>
+Iteration 22:  log likelihood = <span class=result>-69.098157</span>
+Iteration 23:  log likelihood = <span class=result>-69.098157</span>
+Iteration 24:  log likelihood = <span class=result>-69.098157</span>
+Iteration 25:  log likelihood = <span class=result>-69.098157</span>
+Iteration 26:  log likelihood = <span class=result>-69.098157</span>
+Iteration 27:  log likelihood = <span class=result>-69.098157</span>
+Iteration 28:  log likelihood = <span class=result>-69.098157</span>
+Iteration 29:  log likelihood = <span class=result>-69.098157</span>
+Iteration 30:  log likelihood = <span class=result>-69.098157</span>
+Iteration 31:  log likelihood = <span class=result>-69.098157</span>
+Iteration 32:  log likelihood = <span class=result>-69.098157</span>
+Iteration 33:  log likelihood = <span class=result>-69.098157</span>
+Iteration 34:  log likelihood = <span class=result>-69.098157</span>
+Iteration 35:  log likelihood = <span class=result>-69.098157</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-69.098157</span>
+Iteration 1:   log likelihood = <span class=result>-69.098157</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          77                     </span>Number of obs   =<span class=result>        77</span>
+No. of failures = <span class=result>          18</span>
+Time at risk    = <span class=result> 1484.433333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      5.10</span>
+Log likelihood  =   <span class=result>-69.098157                     </span>Prob &gt; chi2     =<span class=result>    0.0239</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigg |<span class=result>   1.81e-16   8.09e-09    -0.00   1.000            0           .</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-688.93216</span>
+Iteration 1:   log likelihood = <span class=result>-685.44384</span>
+Iteration 2:   log likelihood = <span class=result> -685.3287</span>
+Iteration 3:   log likelihood = <span class=result>-685.32843</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-685.32843</span>
+<br><br>
+Cox regression -- Breslow method for ties
+<br><br>
+No. of subjects = <span class=result>        1135                     </span>Number of obs   =<span class=result>      1135</span>
+No. of failures = <span class=result>         101</span>
+Time at risk    = <span class=result> 30192.63333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      7.21</span>
+Log likelihood  =   <span class=result>-685.32843                     </span>Prob &gt; chi2     =<span class=result>    0.0073</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigg |<span class=result>    .481709   .1431398    -2.46   0.014     .2690607    .8624207</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-137.49801</span>
+Iteration 1:   log likelihood = <span class=result>-135.19522</span>
+Iteration 2:   log likelihood = <span class=result>-134.87464</span>
+Iteration 3:   log likelihood = <span class=result>-134.85562</span>
+Iteration 4:   log likelihood = <span class=result>-134.85549</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-134.85549</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         982                     </span>Number of obs   =<span class=result>       982</span>
+No. of failures = <span class=result>          21</span>
+Time at risk    = <span class=result>     27361.4</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      5.29</span>
+Log likelihood  =   <span class=result>-134.85549                     </span>Prob &gt; chi2     =<span class=result>    0.0215</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigg |<span class=result>   .1686201    .172857    -1.74   0.082      .022611    1.257473</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-42.733208</span>
+Iteration 1:   log likelihood = <span class=result> -41.26349</span>
+Iteration 2:   log likelihood = <span class=result>-41.137274</span>
+Iteration 3:   log likelihood = <span class=result> -41.13725</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result> -41.13725</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          28                     </span>Number of obs   =<span class=result>        28</span>
+No. of failures = <span class=result>          15</span>
+Time at risk    = <span class=result> 392.8666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      3.19</span>
+Log likelihood  =   <span class=result> -41.13725                     </span>Prob &gt; chi2     =<span class=result>    0.0740</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigg |<span class=result>   2.719231   1.452505     1.87   0.061     .9544828     7.74683</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          25                     </span>Number of obs   =<span class=result>        25</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 409.7666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigg |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+no observations
+<br><br>
+<span class=input>. bysort organ_code: stcox cmvigm</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: cmvigm omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>-17.809372</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-17.809372</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          40                     </span>Number of obs   =<span class=result>        40</span>
+No. of failures = <span class=result>           5</span>
+Time at risk    = <span class=result>       359.2</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>-17.809372                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigm |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: cmvigm omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>-7.6962126</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-7.6962126</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          65                     </span>Number of obs   =<span class=result>        65</span>
+No. of failures = <span class=result>           2</span>
+Time at risk    = <span class=result> 571.8333333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>-7.6962126                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigm |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: cmvigm omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>-8.9811787</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-8.9811787</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         154                     </span>Number of obs   =<span class=result>       154</span>
+No. of failures = <span class=result>           2</span>
+Time at risk    = <span class=result> 1019.733333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>-8.9811787                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigm |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>           6                     </span>Number of obs   =<span class=result>         6</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result>        47.1</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigm |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+insufficient observations
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+         failure _d:  <span class=result>die == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_die/30</span>
+<br><br>
+note: cmvigm omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          31                     </span>Number of obs   =<span class=result>        31</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result>       300.4</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigm |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. gen gfail=1 if collapse_date!=.</span>
+(3485 missing values generated)
+<br><br>
+<span class=input>. replace gfail=0 if collapse_date==.</span>
+(3485 real changes made)
+<br><br>
+<span class=input>. gen fu_gfail=collapse_date-graft_date if gfail==1</span>
+(3485 missing values generated)
+<br><br>
+<span class=input>. replace fu_gfail=today-graft_date if gfail==0</span>
+(3485 real changes made)
+<br><br>
+<span class=input>. </span>
+<span class=input>. stset fu_gfail, failure(gfail==1) scale (30)</span>
+<br><br>
+<span class=result>     </span>failure event:  <span class=result>gfail == 1</span>
+obs. time interval:  <span class=result>(0, fu_gfail]</span>
+ exit on or before:  <span class=result>failure</span>
+<span class=result>    </span>t for analysis:  <span class=result>time/30</span>
+<br><br>
+------------------------------------------------------------------------------
+<span class=result>     3497</span>  total obs.
+<span class=result>        1</span>  obs. end on or before enter()
+------------------------------------------------------------------------------
+<span class=result>     3496</span>  obs. remaining, representing
+<span class=result>       12</span>  failures in single record/single failure data
+<span class=result> 86771.47</span>  total analysis time at risk, at risk from t = <span class=result>        0</span>
+<span class=result>                             </span>earliest observed entry t = <span class=result>        0</span>
+<span class=result>                                  </span>last observed exit t = <span class=result>     70.9</span>
+<br><br>
+<span class=input>. stcox wait_t if organ_code==2</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-40.621459</span>
+Iteration 1:   log likelihood = <span class=result>-39.948634</span>
+Iteration 2:   log likelihood = <span class=result>-39.944818</span>
+Iteration 3:   log likelihood = <span class=result>-39.944812</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-39.944812</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>        1140                     </span>Number of obs   =<span class=result>      1140</span>
+No. of failures = <span class=result>           6</span>
+Time at risk    = <span class=result>     32941.2</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      1.35</span>
+Log likelihood  =   <span class=result>-39.944812                     </span>Prob &gt; chi2     =<span class=result>    0.2447</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>    1.00137   .0009823     1.40   0.163     .9994467    1.003297</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox age if organ_code==2</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-40.621459</span>
+Iteration 1:   log likelihood = <span class=result>-40.621382</span>
+Iteration 2:   log likelihood = <span class=result>-40.621382</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-40.621382</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>        1140                     </span>Number of obs   =<span class=result>      1140</span>
+No. of failures = <span class=result>           6</span>
+Time at risk    = <span class=result>     32947.5</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>-40.621382                     </span>Prob &gt; chi2     =<span class=result>    0.9901</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |<span class=result>   1.000087   .0069049     0.01   0.990     .9866446    1.013712</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox pra if organ_code==2</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+note: pra omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         310                     </span>Number of obs   =<span class=result>       310</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 2401.566667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         pra |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox cmvigg if organ_code==2</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-40.604066</span>
+Iteration 1:   log likelihood = <span class=result>-39.477665</span>
+Iteration 2:   log likelihood = <span class=result>-39.165581</span>
+Iteration 3:   log likelihood = <span class=result>-39.059338</span>
+Iteration 4:   log likelihood = <span class=result> -39.02127</span>
+Iteration 5:   log likelihood = <span class=result>-39.007396</span>
+Iteration 6:   log likelihood = <span class=result> -39.00231</span>
+Iteration 7:   log likelihood = <span class=result>-39.000441</span>
+Iteration 8:   log likelihood = <span class=result>-38.999754</span>
+Iteration 9:   log likelihood = <span class=result>-38.999502</span>
+Iteration 10:  log likelihood = <span class=result>-38.999409</span>
+Iteration 11:  log likelihood = <span class=result>-38.999374</span>
+Iteration 12:  log likelihood = <span class=result>-38.999362</span>
+Iteration 13:  log likelihood = <span class=result>-38.999357</span>
+Iteration 14:  log likelihood = <span class=result>-38.999355</span>
+Iteration 15:  log likelihood = <span class=result>-38.999355</span>
+Iteration 16:  log likelihood = <span class=result>-38.999355</span>
+Iteration 17:  log likelihood = <span class=result>-38.999355</span>
+Iteration 18:  log likelihood = <span class=result>-38.999354</span>
+Iteration 19:  log likelihood = <span class=result>-38.999354</span>
+Iteration 20:  log likelihood = <span class=result>-38.999354</span>
+Iteration 21:  log likelihood = <span class=result>-38.999354</span>
+Iteration 22:  log likelihood = <span class=result>-38.999354</span>
+Iteration 23:  log likelihood = <span class=result>-38.999354</span>
+Iteration 24:  log likelihood = <span class=result>-38.999354</span>
+Iteration 25:  log likelihood = <span class=result>-38.999354</span>
+Iteration 26:  log likelihood = <span class=result>-38.999354</span>
+Iteration 27:  log likelihood = <span class=result>-38.999354</span>
+Iteration 28:  log likelihood = <span class=result>-38.999354</span>
+Iteration 29:  log likelihood = <span class=result>-38.999354</span>
+Iteration 30:  log likelihood = <span class=result>-38.999354</span>
+Iteration 31:  log likelihood = <span class=result>-38.999354</span>
+Iteration 32:  log likelihood = <span class=result>-38.999354</span>
+Iteration 33:  log likelihood = <span class=result>-38.999354</span>
+Iteration 34:  log likelihood = <span class=result>-38.999354</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-38.999354</span>
+Iteration 1:   log likelihood = <span class=result>-38.999354</span>
+Iteration 2:   log likelihood = <span class=result>-38.999354</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>        1137                     </span>Number of obs   =<span class=result>      1137</span>
+No. of failures = <span class=result>           6</span>
+Time at risk    = <span class=result>     32797.7</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      3.21</span>
+Log likelihood  =   <span class=result>-38.999354                     </span>Prob &gt; chi2     =<span class=result>    0.0732</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigg |<span class=result>   1.50e-16   9.03e-09    -0.00   1.000            0           .</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox cmvigm if organ_code==2</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+note: cmvigm omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>         0</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>         0</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>          65                     </span>Number of obs   =<span class=result>        65</span>
+No. of failures = <span class=result>           0</span>
+Time at risk    = <span class=result> 587.7666667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>         0                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigm |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox wait_t if organ_code==3</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-33.689193</span>
+Iteration 1:   log likelihood = <span class=result>-33.460376</span>
+Iteration 2:   log likelihood = <span class=result>-33.454199</span>
+Iteration 3:   log likelihood = <span class=result>-33.454191</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-33.454191</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         991                     </span>Number of obs   =<span class=result>       991</span>
+No. of failures = <span class=result>           5</span>
+Time at risk    = <span class=result> 28057.13333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.47</span>
+Log likelihood  =   <span class=result>-33.454191                     </span>Prob &gt; chi2     =<span class=result>    0.4930</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      wait_t |<span class=result>   .9991744   .0012928    -0.64   0.523     .9966437    1.001711</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox age if organ_code==3</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-33.725082</span>
+Iteration 1:   log likelihood = <span class=result>-33.704412</span>
+Iteration 2:   log likelihood = <span class=result>  -33.7044</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>  -33.7044</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         997                     </span>Number of obs   =<span class=result>       997</span>
+No. of failures = <span class=result>           5</span>
+Time at risk    = <span class=result>     28324.3</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.04</span>
+Log likelihood  =   <span class=result>  -33.7044                     </span>Prob &gt; chi2     =<span class=result>    0.8388</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |<span class=result>   .9930719   .0336897    -0.20   0.838     .9291886    1.061347</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox pra if organ_code==3</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-5.5568281</span>
+Iteration 1:   log likelihood = <span class=result>-5.5391656</span>
+Iteration 2:   log likelihood = <span class=result> -5.530357</span>
+Iteration 3:   log likelihood = <span class=result>-5.5245832</span>
+Iteration 4:   log likelihood = <span class=result>-5.5196584</span>
+Iteration 5:   log likelihood = <span class=result>-5.5156845</span>
+Iteration 6:   log likelihood = <span class=result>-5.5128989</span>
+Iteration 7:   log likelihood = <span class=result>-5.5110759</span>
+Iteration 8:   log likelihood = <span class=result>-5.5100907</span>
+Iteration 9:   log likelihood = <span class=result>-5.5096615</span>
+Iteration 10:  log likelihood = <span class=result>-5.5094917</span>
+Iteration 11:  log likelihood = <span class=result>-5.5094269</span>
+Iteration 12:  log likelihood = <span class=result>-5.5094026</span>
+Iteration 13:  log likelihood = <span class=result>-5.5093936</span>
+Iteration 14:  log likelihood = <span class=result>-5.5093903</span>
+Iteration 15:  log likelihood = <span class=result>-5.5093891</span>
+Iteration 16:  log likelihood = <span class=result>-5.5093886</span>
+Iteration 17:  log likelihood = <span class=result>-5.5093884</span>
+Iteration 18:  log likelihood = <span class=result>-5.5093884</span>
+Iteration 19:  log likelihood = <span class=result>-5.5093884</span>
+Iteration 20:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 21:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 22:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 23:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 24:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 25:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 26:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 27:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 28:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 29:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 30:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 31:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 32:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 33:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 34:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 35:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 36:  log likelihood = <span class=result>-5.5093883</span>
+Iteration 37:  log likelihood = <span class=result>-5.5093883</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-5.5093883</span>
+Iteration 1:   log likelihood = <span class=result>-5.5093883</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         259                     </span>Number of obs   =<span class=result>       259</span>
+No. of failures = <span class=result>           1</span>
+Time at risk    = <span class=result> 1811.266667</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.09</span>
+Log likelihood  =   <span class=result>-5.5093883                     </span>Prob &gt; chi2     =<span class=result>    0.7581</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         pra |<span class=result>   5.11e-77   3.22e-68    -0.00   1.000            0           .</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox cmvigg if organ_code==3</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+Iteration 0:   log likelihood = <span class=result>-33.637945</span>
+Iteration 1:   log likelihood = <span class=result>-33.632507</span>
+Iteration 2:   log likelihood = <span class=result>-33.632502</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-33.632502</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         982                     </span>Number of obs   =<span class=result>       982</span>
+No. of failures = <span class=result>           5</span>
+Time at risk    = <span class=result> 27764.13333</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>1</span>)      =<span class=result>      0.01</span>
+Log likelihood  =   <span class=result>-33.632502                     </span>Prob &gt; chi2     =<span class=result>    0.9169</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigg |<span class=result>   .8910421   .9964768    -0.10   0.918     .0995351    7.976644</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. stcox cmvigm if organ_code==3</span>
+<br><br>
+<span class=result>         </span>failure _d:  <span class=result>gfail == 1</span>
+<span class=result>   </span>analysis time _t:  <span class=result>fu_gfail/30</span>
+<br><br>
+note: cmvigm omitted because of collinearity
+Iteration 0:   log likelihood = <span class=result>-5.0369526</span>
+Refining estimates:
+Iteration 0:   log likelihood = <span class=result>-5.0369526</span>
+<br><br>
+Cox regression -- no ties
+<br><br>
+No. of subjects = <span class=result>         154                     </span>Number of obs   =<span class=result>       154</span>
+No. of failures = <span class=result>           1</span>
+Time at risk    = <span class=result>      1010.8</span>
+<span class=result>                                                   </span>LR chi2(<span class=result>0</span>)      =<span class=result>      0.00</span>
+Log likelihood  =   <span class=result>-5.0369526                     </span>Prob &gt; chi2     =<span class=result>         .</span>
+<br><br>
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      cmvigm |<span class=result>  (omitted)</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

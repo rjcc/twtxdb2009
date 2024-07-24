@@ -1,0 +1,265 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. * Variables:</span>
+<span class=input>. *   Recipient</span>
+<span class=input>. *     Request: y organ age sex blood_type hepatitis</span>
+<span class=input>. *     Date: write_date graft_date pat_pat_birthday</span>
+<span class=input>. *     Date2: die_date lossfu_date chase_date          </span>
+<span class=input>. *     OPO: trace_hosp_code writer_hosp_code graft_hosp_code</span>
+<span class=input>. *     Basic: pat_btype pat_sex pat_ht pat_wt (age) </span>
+<span class=input>. *     Outcome: die_relation die_cause graft_organ_status complication_flag </span>
+<span class=input>. *         case_condi</span>
+<span class=input>. *         cornea_fail_date eye_cause</span>
+<span class=input>. *     Donor: dnr_id_no</span>
+<span class=input>. </span>
+<span class=input>. tabstat write_date, stat(min max) format(%dCY-N-D) col(var)</span>
+<br><br>
+   stats |  write_~e
+---------+----------
+     min |<span class=result>2006-11-06</span>
+     max |<span class=result>2009-10-28</span>
+--------------------
+<br><br>
+<span class=input>. misstable summarize _all</span>
+                                                               Obs&lt;.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs&gt;.     Obs&lt;.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+  complicati~g |<span class=result>       383</span>          <span class=result>       801</span>  |      2          0           1
+   lossfu_date |<span class=result>     1,184</span>          <span class=result>         0</span>  |      0          .           .
+     eye_cause |<span class=result>     1,182</span>          <span class=result>         2</span>  |      1          3           3
+       pat_sex |<span class=result>        92</span>          <span class=result>     1,092</span>  |      2          1           2
+        pat_ht |<span class=result>        58</span>          <span class=result>     1,126</span>  |      5          0         168
+        pat_wt |<span class=result>        58</span>          <span class=result>     1,126</span>  |      8          0          70
+     pat_btype |<span class=result>       103</span>          <span class=result>     1,081</span>  |      4          1           4
+        source |<span class=result>         1</span>          <span class=result>     1,183</span>  |      1          1           1
+  pat_birthday |<span class=result>        32</span>          <span class=result>     1,152</span>  |   &gt;500     -16799       17775
+           age |<span class=result>        32</span>          <span class=result>     1,152</span>  |   &gt;500    .221772    95.61385
+  -----------------------------------------------------------------------------
+<br><br>
+<span class=input>. tab y</span>
+<br><br>
+<span class=result>          </span>y |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       1994 |<span class=result>          1        0.08        0.08</span>
+       2000 |<span class=result>          2        0.17        0.25</span>
+       2002 |<span class=result>          2        0.17        0.42</span>
+       2003 |<span class=result>          6        0.51        0.93</span>
+       2004 |<span class=result>          2        0.17        1.10</span>
+       2005 |<span class=result>          8        0.68        1.77</span>
+       2006 |<span class=result>          5        0.42        2.20</span>
+       2007 |<span class=result>        185       15.62       17.82</span>
+       2008 |<span class=result>        549       46.37       64.19</span>
+       2009 |<span class=result>        424       35.81      100.00</span>
+------------+-----------------------------------
+      Total |<span class=result>      1,184      100.00</span>
+<br><br>
+<span class=input>. tabstat write_date if y&gt;=2007, stat(min max) format(%dCY-N-D) col(var)</span>
+<br><br>
+   stats |  write_~e
+---------+----------
+     min |<span class=result>2007-05-07</span>
+     max |<span class=result>2009-10-28</span>
+--------------------
+<br><br>
+<span class=input>. tab source y if y&gt;=2007, col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                y
+    source |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+   Cadaver |<span class=result>       185        548        424 </span>|<span class=result>     1,157 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       185        548        424 </span>|<span class=result>     1,157 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab confine y if y&gt;=2007, col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                y
+   confine |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+    Taiwan |<span class=result>       181        542        414 </span>|<span class=result>     1,137 </span>
+<span class=result>           </span>|<span class=result>     97.84      98.72      97.64 </span>|<span class=result>     98.19 </span>
+-----------+---------------------------------+----------
+Outside-TW |<span class=result>         4          7         10 </span>|<span class=result>        21 </span>
+<span class=result>           </span>|<span class=result>      2.16       1.28       2.36 </span>|<span class=result>      1.81 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       185        549        424 </span>|<span class=result>     1,158 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab pat_sex y if y&gt;=2007, col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                y
+   pat_sex |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         M |<span class=result>        94        321        239 </span>|<span class=result>       654 </span>
+<span class=result>           </span>|<span class=result>     68.61      60.68      58.15 </span>|<span class=result>     60.72 </span>
+-----------+---------------------------------+----------
+         F |<span class=result>        43        208        172 </span>|<span class=result>       423 </span>
+<span class=result>           </span>|<span class=result>     31.39      39.32      41.85 </span>|<span class=result>     39.28 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       137        529        411 </span>|<span class=result>     1,077 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tabstat age if y&gt;=2007, by(y) stat(n mean sd med min max) format(%9.2g)</span>
+<br><br>
+Summary for variables: age
+     by categories of: y 
+<br><br>
+       y |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2007 | <span class=result>      165        54        22        58       1.7        87</span>
+    2008 | <span class=result>      538        59        19        64       .22        91</span>
+    2009 | <span class=result>      424        57        20        62       .75        96</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>     1127        58        20        63       .22        96</span>
+----------------------------------------------------------------------
+<br><br>
+<span class=input>. tab pat_btype y if y&gt;=2007, col</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                y
+ pat_btype |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+         O |<span class=result>       102        377        248 </span>|<span class=result>       727 </span>
+<span class=result>           </span>|<span class=result>     75.56      71.27      60.64 </span>|<span class=result>     67.75 </span>
+-----------+---------------------------------+----------
+         A |<span class=result>        13         71         78 </span>|<span class=result>       162 </span>
+<span class=result>           </span>|<span class=result>      9.63      13.42      19.07 </span>|<span class=result>     15.10 </span>
+-----------+---------------------------------+----------
+         B |<span class=result>        15         67         69 </span>|<span class=result>       151 </span>
+<span class=result>           </span>|<span class=result>     11.11      12.67      16.87 </span>|<span class=result>     14.07 </span>
+-----------+---------------------------------+----------
+        AB |<span class=result>         5         14         14 </span>|<span class=result>        33 </span>
+<span class=result>           </span>|<span class=result>      3.70       2.65       3.42 </span>|<span class=result>      3.08 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       135        529        409 </span>|<span class=result>     1,073 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab graft_organ_status y if y&gt;=2007, col missing</span>
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+graft_orga |                y
+  n_status |      2007       2008       2009 |     Total
+-----------+---------------------------------+----------
+     Clear |<span class=result>       113        304        245 </span>|<span class=result>       662 </span>
+<span class=result>           </span>|<span class=result>     61.08      55.37      57.78 </span>|<span class=result>     57.17 </span>
+-----------+---------------------------------+----------
+Semi-Clear |<span class=result>        12         62         26 </span>|<span class=result>       100 </span>
+<span class=result>           </span>|<span class=result>      6.49      11.29       6.13 </span>|<span class=result>      8.64 </span>
+-----------+---------------------------------+----------
+      Fail |<span class=result>         3         18          1 </span>|<span class=result>        22 </span>
+<span class=result>           </span>|<span class=result>      1.62       3.28       0.24 </span>|<span class=result>      1.90 </span>
+-----------+---------------------------------+----------
+         ? |<span class=result>        57        165        152 </span>|<span class=result>       374 </span>
+<span class=result>           </span>|<span class=result>     30.81      30.05      35.85 </span>|<span class=result>     32.30 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       185        549        424 </span>|<span class=result>     1,158 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab source graft_organ_status if graft_organ_status!=999 &amp; y&gt;=2007, row exact</span>
+<br><br>
++----------------+
+| Key            |
+|----------------|
+|   <i>frequency</i>    |
+| <i>row percentage</i> |
++----------------+
+<br><br>
+           |        graft_organ_status
+    source |     Clear  Semi-Clea       Fail |     Total
+-----------+---------------------------------+----------
+   Cadaver |<span class=result>       661        100         22 </span>|<span class=result>       783 </span>
+<span class=result>           </span>|<span class=result>     84.42      12.77       2.81 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       661        100         22 </span>|<span class=result>       783 </span>
+<span class=result>           </span>|<span class=result>     84.42      12.77       2.81 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<span class=input>. tab confine graft_organ_status if graft_organ_status!=999 &amp; y&gt;=2007, row exact</span>
+<br><br>
++----------------+
+| Key            |
+|----------------|
+|   <i>frequency</i>    |
+| <i>row percentage</i> |
++----------------+
+<br><br>
+Enumerating sample-space combinations:
+stage 3:  enumerations = 1
+stage 2:  enumerations = 1
+stage 1:  enumerations = 0
+<br><br>
+           |        graft_organ_status
+   confine |     Clear  Semi-Clea       Fail |     Total
+-----------+---------------------------------+----------
+    Taiwan |<span class=result>       642         99         22 </span>|<span class=result>       763 </span>
+<span class=result>           </span>|<span class=result>     84.14      12.98       2.88 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+Outside-TW |<span class=result>        20          1          0 </span>|<span class=result>        21 </span>
+<span class=result>           </span>|<span class=result>     95.24       4.76       0.00 </span>|<span class=result>    100.00 </span>
+-----------+---------------------------------+----------
+     Total |<span class=result>       662        100         22 </span>|<span class=result>       784 </span>
+<span class=result>           </span>|<span class=result>     84.44      12.76       2.81 </span>|<span class=result>    100.00 </span>
+<br><br>
+           Fisher's exact =                 <span class=result>0.641</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>

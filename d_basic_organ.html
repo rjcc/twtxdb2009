@@ -1,0 +1,652 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: ffffff;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #CC6600}
+.result{color: #000099}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+<br><br>
+<span class=input>. gen hepatitis=0 if anti_hcv==0| anti_hbs==0| hbs_ag==0| hbe_ag==0</span>
+(1006 missing values generated)
+<br><br>
+<span class=input>. replace hepatitis=1 if anti_hcv==1&amp; anti_hbs==1&amp; hbs_ag==1&amp; hbe_ag==1</span>
+(71 real changes made)
+<br><br>
+<span class=input>. replace hepatitis=999 if hepatitis==.</span>
+(935 real changes made)
+<br><br>
+<span class=input>. label values hepatitis yn</span>
+<br><br>
+<span class=input>. </span>
+<span class=input>. * Variables: sex, btype, drug_abuse, head_injury, fever, shock, cpr</span>
+<span class=input>. *      brain_cause, die_cause</span>
+<span class=input>. *      hepatitis, dnr_agree_doc, dnr_result, non_dnr_resaon, dnr_types</span>
+<span class=input>. * Plans:</span>
+<span class=input>. *   Donors (dnr=donor)</span>
+<span class=input>. *    cancer (elsewhere)</span>
+<span class=input>. *    non_donor (elsewhere)</span>
+<span class=input>. *    yearly: sex, age, hepatitis, brain_cause, die_cause, dnr_result</span>
+<span class=input>. *            non_dnr_reason, dnr_types</span>
+<span class=input>. </span>
+<span class=input>. misstable summarize donor_date write_date</span>
+(variables nonmissing or string)
+<br><br>
+<span class=input>. drop if y_donor&lt;2004</span>
+(132 observations deleted)
+<br><br>
+<span class=input>. * Drop unreliable data before 2004</span>
+<span class=input>. tabstat donor_date, stat (min, max) col(var) format(%dCY-N-D)</span>
+<br><br>
+   stats |  donor_~e
+---------+----------
+     min |<span class=result>2004-01-04</span>
+     max |<span class=result>2009-10-24</span>
+--------------------
+<br><br>
+<span class=input>. </span>
+<span class=input>. bysort organ_code: tab sex_type y_donor, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+  sex_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         M |<span class=result>        24         58         50         51         63         54 </span>|<span class=result>       300 </span>
+<span class=result>           </span>|<span class=result>     64.86      66.67      70.42      68.00      75.00      72.00 </span>|<span class=result>     69.93 </span>
+-----------+------------------------------------------------------------------+----------
+         F |<span class=result>        13         29         21         24         21         21 </span>|<span class=result>       129 </span>
+<span class=result>           </span>|<span class=result>     35.14      33.33      29.58      32.00      25.00      28.00 </span>|<span class=result>     30.07 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        37         87         71         75         84         75 </span>|<span class=result>       429 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+  sex_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         M |<span class=result>        20         58         45         54         64         56 </span>|<span class=result>       297 </span>
+<span class=result>           </span>|<span class=result>     64.52      66.67      64.29      70.13      76.19      73.68 </span>|<span class=result>     69.88 </span>
+-----------+------------------------------------------------------------------+----------
+         F |<span class=result>        11         29         25         23         20         20 </span>|<span class=result>       128 </span>
+<span class=result>           </span>|<span class=result>     35.48      33.33      35.71      29.87      23.81      26.32 </span>|<span class=result>     30.12 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        31         87         70         77         84         76 </span>|<span class=result>       425 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+  sex_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         M |<span class=result>        62        155        137        132        154        139 </span>|<span class=result>       779 </span>
+<span class=result>           </span>|<span class=result>     68.89      69.82      69.19      72.93      77.00      72.77 </span>|<span class=result>     72.00 </span>
+-----------+------------------------------------------------------------------+----------
+         F |<span class=result>        28         67         61         49         46         52 </span>|<span class=result>       303 </span>
+<span class=result>           </span>|<span class=result>     31.11      30.18      30.81      27.07      23.00      27.23 </span>|<span class=result>     28.00 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        90        222        198        181        200        191 </span>|<span class=result>     1,082 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+  sex_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         M |<span class=result>         4          4          6          5          6          1 </span>|<span class=result>        26 </span>
+<span class=result>           </span>|<span class=result>     80.00      40.00      60.00      62.50     100.00      25.00 </span>|<span class=result>     60.47 </span>
+-----------+------------------------------------------------------------------+----------
+         F |<span class=result>         1          6          4          3          0          3 </span>|<span class=result>        17 </span>
+<span class=result>           </span>|<span class=result>     20.00      60.00      40.00      37.50       0.00      75.00 </span>|<span class=result>     39.53 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5         10         10          8          6          4 </span>|<span class=result>        43 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+  sex_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         M |<span class=result>         4          4          2          6         12          6 </span>|<span class=result>        34 </span>
+<span class=result>           </span>|<span class=result>     80.00      57.14      50.00      66.67      70.59      60.00 </span>|<span class=result>     65.38 </span>
+-----------+------------------------------------------------------------------+----------
+         F |<span class=result>         1          3          2          3          5          4 </span>|<span class=result>        18 </span>
+<span class=result>           </span>|<span class=result>     20.00      42.86      50.00      33.33      29.41      40.00 </span>|<span class=result>     34.62 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5          7          4          9         17         10 </span>|<span class=result>        52 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+  sex_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         M |<span class=result>        51        137        155        134        191        167 </span>|<span class=result>       835 </span>
+<span class=result>           </span>|<span class=result>     61.45      76.11      73.46      68.02      72.62      70.17 </span>|<span class=result>     71.25 </span>
+-----------+------------------------------------------------------------------+----------
+         F |<span class=result>        32         43         56         63         72         71 </span>|<span class=result>       337 </span>
+<span class=result>           </span>|<span class=result>     38.55      23.89      26.54      31.98      27.38      29.83 </span>|<span class=result>     28.75 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        83        180        211        197        263        238 </span>|<span class=result>     1,172 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. gen age=(donor_date-birthday)/365.24</span>
+(12 missing values generated)
+<br><br>
+<span class=input>. bysort organ_code: tabstat age, by(y_donor) stat(n mean sd med min max) format(%9.2g)</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
+Summary for variables: age
+     by categories of: y_donor 
+<br><br>
+ y_donor |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2004 | <span class=result>       37        35        15        40       8.9        57</span>
+    2005 | <span class=result>       87        37        13        40        13        65</span>
+    2006 | <span class=result>       70        38        12        40        17        60</span>
+    2007 | <span class=result>       75        39        13        42       9.1        58</span>
+    2008 | <span class=result>       84        37        13        40        13        64</span>
+    2009 | <span class=result>       75        40        14        41        11        67</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      428        38        13        41       8.9        67</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
+Summary for variables: age
+     by categories of: y_donor 
+<br><br>
+ y_donor |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2004 | <span class=result>       31        34        17        27       7.5        57</span>
+    2005 | <span class=result>       87        34        15        34       1.2        66</span>
+    2006 | <span class=result>       69        37        11        39        17        71</span>
+    2007 | <span class=result>       77        38        14        41       9.1        58</span>
+    2008 | <span class=result>       84        39        15        41        14        78</span>
+    2009 | <span class=result>       76        38        14        40       6.3        67</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>      424        37        14        39       1.2        78</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
+Summary for variables: age
+     by categories of: y_donor 
+<br><br>
+ y_donor |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2004 | <span class=result>       90        36        17        41      .019        63</span>
+    2005 | <span class=result>      222        38        14        41       1.2        66</span>
+    2006 | <span class=result>      196        42        13        44        17        72</span>
+    2007 | <span class=result>      181        38        13        42       2.5        58</span>
+    2008 | <span class=result>      200        40        14        42        14        78</span>
+    2009 | <span class=result>      191        41        14        44       6.3        67</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>     1080        39        14        42      .019        78</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
+Summary for variables: age
+     by categories of: y_donor 
+<br><br>
+ y_donor |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2004 | <span class=result>        5        19       4.7        19        15        27</span>
+    2005 | <span class=result>       10        36        12        35        19        53</span>
+    2006 | <span class=result>       10        38        14        42        18        52</span>
+    2007 | <span class=result>        8        33        16        33        15        53</span>
+    2008 | <span class=result>        6        26       9.1        22        21        44</span>
+    2009 | <span class=result>        4        37        18        36        22        55</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>       43        33        14        28        15        55</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
+Summary for variables: age
+     by categories of: y_donor 
+<br><br>
+ y_donor |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2004 | <span class=result>        5        26        12        22        14        46</span>
+    2005 | <span class=result>        7        41       9.3        42        25        51</span>
+    2006 | <span class=result>        4        30        13        31        18        42</span>
+    2007 | <span class=result>        9        36        17        36        14        58</span>
+    2008 | <span class=result>       17        31        13        27        14        53</span>
+    2009 | <span class=result>       10        27        16        23       6.3        58</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>       52        32        14        30       6.3        58</span>
+----------------------------------------------------------------------
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
+Summary for variables: age
+     by categories of: y_donor 
+<br><br>
+ y_donor |         N      mean        sd       p50       min       max
+---------+------------------------------------------------------------
+    2004 | <span class=result>       83        38        15        43       .96        62</span>
+    2005 | <span class=result>      180        41        15        42       8.3        78</span>
+    2006 | <span class=result>      203        42        14        46       3.3        72</span>
+    2007 | <span class=result>      197        39        15        42       .48        84</span>
+    2008 | <span class=result>      263        42        15        45       .31        79</span>
+    2009 | <span class=result>      238        45        15        48       6.3        97</span>
+---------+------------------------------------------------------------
+   Total | <span class=result>     1164        42        15        45       .31        97</span>
+----------------------------------------------------------------------
+<br><br>
+<span class=input>. bysort organ_code: tab blood_type y_donor, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+blood_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         O |<span class=result>        17         45         31         39         47         39 </span>|<span class=result>       218 </span>
+<span class=result>           </span>|<span class=result>     45.95      51.72      43.66      52.00      55.95      52.00 </span>|<span class=result>     50.82 </span>
+-----------+------------------------------------------------------------------+----------
+         A |<span class=result>        15         22         25         19         22         18 </span>|<span class=result>       121 </span>
+<span class=result>           </span>|<span class=result>     40.54      25.29      35.21      25.33      26.19      24.00 </span>|<span class=result>     28.21 </span>
+-----------+------------------------------------------------------------------+----------
+         B |<span class=result>         4         19         14         17         12         16 </span>|<span class=result>        82 </span>
+<span class=result>           </span>|<span class=result>     10.81      21.84      19.72      22.67      14.29      21.33 </span>|<span class=result>     19.11 </span>
+-----------+------------------------------------------------------------------+----------
+        AB |<span class=result>         1          1          1          0          3          2 </span>|<span class=result>         8 </span>
+<span class=result>           </span>|<span class=result>      2.70       1.15       1.41       0.00       3.57       2.67 </span>|<span class=result>      1.86 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        37         87         71         75         84         75 </span>|<span class=result>       429 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+blood_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         O |<span class=result>        13         47         30         43         42         34 </span>|<span class=result>       209 </span>
+<span class=result>           </span>|<span class=result>     41.94      54.02      42.86      55.84      50.00      44.74 </span>|<span class=result>     49.18 </span>
+-----------+------------------------------------------------------------------+----------
+         A |<span class=result>        13         28         24         17         21         22 </span>|<span class=result>       125 </span>
+<span class=result>           </span>|<span class=result>     41.94      32.18      34.29      22.08      25.00      28.95 </span>|<span class=result>     29.41 </span>
+-----------+------------------------------------------------------------------+----------
+         B |<span class=result>         3         11         14         15         17         16 </span>|<span class=result>        76 </span>
+<span class=result>           </span>|<span class=result>      9.68      12.64      20.00      19.48      20.24      21.05 </span>|<span class=result>     17.88 </span>
+-----------+------------------------------------------------------------------+----------
+        AB |<span class=result>         2          1          2          2          4          4 </span>|<span class=result>        15 </span>
+<span class=result>           </span>|<span class=result>      6.45       1.15       2.86       2.60       4.76       5.26 </span>|<span class=result>      3.53 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        31         87         70         77         84         76 </span>|<span class=result>       425 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+blood_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         O |<span class=result>        42        107         75         90        101         87 </span>|<span class=result>       502 </span>
+<span class=result>           </span>|<span class=result>     46.67      48.20      37.88      49.72      50.50      45.55 </span>|<span class=result>     46.40 </span>
+-----------+------------------------------------------------------------------+----------
+         A |<span class=result>        27         62         72         43         52         43 </span>|<span class=result>       299 </span>
+<span class=result>           </span>|<span class=result>     30.00      27.93      36.36      23.76      26.00      22.51 </span>|<span class=result>     27.63 </span>
+-----------+------------------------------------------------------------------+----------
+         B |<span class=result>        16         45         41         40         39         49 </span>|<span class=result>       230 </span>
+<span class=result>           </span>|<span class=result>     17.78      20.27      20.71      22.10      19.50      25.65 </span>|<span class=result>     21.26 </span>
+-----------+------------------------------------------------------------------+----------
+        AB |<span class=result>         5          8         10          8          8         12 </span>|<span class=result>        51 </span>
+<span class=result>           </span>|<span class=result>      5.56       3.60       5.05       4.42       4.00       6.28 </span>|<span class=result>      4.71 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        90        222        198        181        200        191 </span>|<span class=result>     1,082 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+blood_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         O |<span class=result>         0          7          5          5          4          3 </span>|<span class=result>        24 </span>
+<span class=result>           </span>|<span class=result>      0.00      70.00      50.00      62.50      66.67      75.00 </span>|<span class=result>     55.81 </span>
+-----------+------------------------------------------------------------------+----------
+         A |<span class=result>         4          2          2          1          2          0 </span>|<span class=result>        11 </span>
+<span class=result>           </span>|<span class=result>     80.00      20.00      20.00      12.50      33.33       0.00 </span>|<span class=result>     25.58 </span>
+-----------+------------------------------------------------------------------+----------
+         B |<span class=result>         1          1          3          2          0          1 </span>|<span class=result>         8 </span>
+<span class=result>           </span>|<span class=result>     20.00      10.00      30.00      25.00       0.00      25.00 </span>|<span class=result>     18.60 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5         10         10          8          6          4 </span>|<span class=result>        43 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+blood_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         O |<span class=result>         2          2          2          6         11          5 </span>|<span class=result>        28 </span>
+<span class=result>           </span>|<span class=result>     40.00      28.57      50.00      66.67      64.71      50.00 </span>|<span class=result>     53.85 </span>
+-----------+------------------------------------------------------------------+----------
+         A |<span class=result>         3          2          2          2          5          3 </span>|<span class=result>        17 </span>
+<span class=result>           </span>|<span class=result>     60.00      28.57      50.00      22.22      29.41      30.00 </span>|<span class=result>     32.69 </span>
+-----------+------------------------------------------------------------------+----------
+         B |<span class=result>         0          3          0          1          0          2 </span>|<span class=result>         6 </span>
+<span class=result>           </span>|<span class=result>      0.00      42.86       0.00      11.11       0.00      20.00 </span>|<span class=result>     11.54 </span>
+-----------+------------------------------------------------------------------+----------
+        AB |<span class=result>         0          0          0          0          1          0 </span>|<span class=result>         1 </span>
+<span class=result>           </span>|<span class=result>      0.00       0.00       0.00       0.00       5.88       0.00 </span>|<span class=result>      1.92 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5          7          4          9         17         10 </span>|<span class=result>        52 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+blood_type |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         O |<span class=result>        43         76         96         98        112        110 </span>|<span class=result>       535 </span>
+<span class=result>           </span>|<span class=result>     51.81      42.22      45.50      49.75      42.59      46.22 </span>|<span class=result>     45.65 </span>
+-----------+------------------------------------------------------------------+----------
+         A |<span class=result>        15         53         65         48         84         50 </span>|<span class=result>       315 </span>
+<span class=result>           </span>|<span class=result>     18.07      29.44      30.81      24.37      31.94      21.01 </span>|<span class=result>     26.88 </span>
+-----------+------------------------------------------------------------------+----------
+         B |<span class=result>         9         39         40         41         53         61 </span>|<span class=result>       243 </span>
+<span class=result>           </span>|<span class=result>     10.84      21.67      18.96      20.81      20.15      25.63 </span>|<span class=result>     20.73 </span>
+-----------+------------------------------------------------------------------+----------
+        AB |<span class=result>         4          6          7         10         14         17 </span>|<span class=result>        58 </span>
+<span class=result>           </span>|<span class=result>      4.82       3.33       3.32       5.08       5.32       7.14 </span>|<span class=result>      4.95 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>        12          6          3          0          0          0 </span>|<span class=result>        21 </span>
+<span class=result>           </span>|<span class=result>     14.46       3.33       1.42       0.00       0.00       0.00 </span>|<span class=result>      1.79 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        83        180        211        197        263        238 </span>|<span class=result>     1,172 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. * Hepatitis=Y if anti_hcv=Y or anti_hbs=Y or hbs_ag=Y or hbe_ag=Y</span>
+<span class=input>. * Hepatitis=N if all above N</span>
+<span class=input>. bysort organ_code: tab hepatitis y_donor, col</span>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Heart
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+ hepatitis |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>        27         63         47         50         68         61 </span>|<span class=result>       316 </span>
+<span class=result>           </span>|<span class=result>     72.97      72.41      66.20      66.67      80.95      81.33 </span>|<span class=result>     73.66 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         0          3          1          4          1          1 </span>|<span class=result>        10 </span>
+<span class=result>           </span>|<span class=result>      0.00       3.45       1.41       5.33       1.19       1.33 </span>|<span class=result>      2.33 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>        10         21         23         21         15         13 </span>|<span class=result>       103 </span>
+<span class=result>           </span>|<span class=result>     27.03      24.14      32.39      28.00      17.86      17.33 </span>|<span class=result>     24.01 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        37         87         71         75         84         75 </span>|<span class=result>       429 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Liver
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+ hepatitis |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>        21         63         46         47         63         58 </span>|<span class=result>       298 </span>
+<span class=result>           </span>|<span class=result>     67.74      72.41      65.71      61.04      75.00      76.32 </span>|<span class=result>     70.12 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         0          2          1          3          2          1 </span>|<span class=result>         9 </span>
+<span class=result>           </span>|<span class=result>      0.00       2.30       1.43       3.90       2.38       1.32 </span>|<span class=result>      2.12 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>        10         22         23         27         19         17 </span>|<span class=result>       118 </span>
+<span class=result>           </span>|<span class=result>     32.26      25.29      32.86      35.06      22.62      22.37 </span>|<span class=result>     27.76 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        31         87         70         77         84         76 </span>|<span class=result>       425 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Kidney
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+ hepatitis |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>        66        171        144        119        158        160 </span>|<span class=result>       818 </span>
+<span class=result>           </span>|<span class=result>     73.33      77.03      72.73      65.75      79.00      83.77 </span>|<span class=result>     75.60 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         0          6          2          6          6          1 </span>|<span class=result>        21 </span>
+<span class=result>           </span>|<span class=result>      0.00       2.70       1.01       3.31       3.00       0.52 </span>|<span class=result>      1.94 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>        24         45         52         56         36         30 </span>|<span class=result>       243 </span>
+<span class=result>           </span>|<span class=result>     26.67      20.27      26.26      30.94      18.00      15.71 </span>|<span class=result>     22.46 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        90        222        198        181        200        191 </span>|<span class=result>     1,082 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Lung
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+ hepatitis |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>         2          8          8          3          6          4 </span>|<span class=result>        31 </span>
+<span class=result>           </span>|<span class=result>     40.00      80.00      80.00      37.50     100.00     100.00 </span>|<span class=result>     72.09 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         0          0          0          1          0          0 </span>|<span class=result>         1 </span>
+<span class=result>           </span>|<span class=result>      0.00       0.00       0.00      12.50       0.00       0.00 </span>|<span class=result>      2.33 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>         3          2          2          4          0          0 </span>|<span class=result>        11 </span>
+<span class=result>           </span>|<span class=result>     60.00      20.00      20.00      50.00       0.00       0.00 </span>|<span class=result>     25.58 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5         10         10          8          6          4 </span>|<span class=result>        43 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Pancreas
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+ hepatitis |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>         4          5          2          3         11          7 </span>|<span class=result>        32 </span>
+<span class=result>           </span>|<span class=result>     80.00      71.43      50.00      33.33      64.71      70.00 </span>|<span class=result>     61.54 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         0          1          0          0          0          1 </span>|<span class=result>         2 </span>
+<span class=result>           </span>|<span class=result>      0.00      14.29       0.00       0.00       0.00      10.00 </span>|<span class=result>      3.85 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>         1          1          2          6          6          2 </span>|<span class=result>        18 </span>
+<span class=result>           </span>|<span class=result>     20.00      14.29      50.00      66.67      35.29      20.00 </span>|<span class=result>     34.62 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>         5          7          4          9         17         10 </span>|<span class=result>        52 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-&gt; organ_code = Cornea
+<br><br>
++-------------------+
+| Key               |
+|-------------------|
+|     <i>frequency</i>     |
+| <i>column percentage</i> |
++-------------------+
+<br><br>
+           |                              y_donor
+ hepatitis |      2004       2005       2006       2007       2008       2009 |     Total
+-----------+------------------------------------------------------------------+----------
+         Y |<span class=result>        44        116        130        125        170        166 </span>|<span class=result>       751 </span>
+<span class=result>           </span>|<span class=result>     53.01      64.44      61.61      63.45      64.64      69.75 </span>|<span class=result>     64.08 </span>
+-----------+------------------------------------------------------------------+----------
+         N |<span class=result>         0          2          2          4         16          4 </span>|<span class=result>        28 </span>
+<span class=result>           </span>|<span class=result>      0.00       1.11       0.95       2.03       6.08       1.68 </span>|<span class=result>      2.39 </span>
+-----------+------------------------------------------------------------------+----------
+         ? |<span class=result>        39         62         79         68         77         68 </span>|<span class=result>       393 </span>
+<span class=result>           </span>|<span class=result>     46.99      34.44      37.44      34.52      29.28      28.57 </span>|<span class=result>     33.53 </span>
+-----------+------------------------------------------------------------------+----------
+     Total |<span class=result>        83        180        211        197        263        238 </span>|<span class=result>     1,172 </span>
+<span class=result>           </span>|<span class=result>    100.00     100.00     100.00     100.00     100.00     100.00 </span>|<span class=result>    100.00 </span>
+<br><br>
+<br><br>
+<br><br>
+<span class=input>. </span>
+<span class=input>. quietly log close</span>
+</pre>
+</body>
+</html>
