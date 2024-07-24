@@ -1,0 +1,11 @@
+Donor's condition on outcomes
+Dates: 2005-08-31 ~ 2009-10-25
+N=1115 (pairs)
+
+Outcome: patient survival
+-Kidney: donor age
+-Heart: donor drug abuse, donor epinephrine
+-Liver: donor shock, donor norepinephrine
+
+No donor's serology markers (HBV,ÿ) affect patient survival;
+No donor's variables affect graft survival (kidney, cornea).

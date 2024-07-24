@@ -1,0 +1,17 @@
+Candidate's effect (eg. wait_time) on outcomes
+Variables: wait_time, PRA, CMV
+
+Dates: 2004-01-1 ~ 2009-10-28
+
+Transplanted candidates:
+PRA and wait_time-> no significant correlation
+
+Outcome: patient death
+-wait_time: no effect for all organs
+-candidates age: heart
+-PRA: no effect
+-CMV-IgG: liver, lung
+
+Outcome: graft failure (kidney)
+-wait_time, candidate's age, PRA, and CMV-IgG all non-sig effect
+

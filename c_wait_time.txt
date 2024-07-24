@@ -1,0 +1,44 @@
+Statistics of waiting time of all candidates
+Dates: 2004-01-01 ~ 2009-10-28
+N=14877
+
+Overall:
+Heart (N=1075): median 113 days
+Liver (N=3948): median 147 days
+Kidney (N=7668): median 821 days
+Lungs (N=173): median 328 days
+Pancreas (N=130): median 455 days
+Cornea (M=1802): median 190 days
+
+For exited candidates:
+
+Heart (N=787):
+   Dead (N=273): median 30 days
+   Tx (N=419): median 68 days
+Liver (N=2493):
+   Dead (N=974): median 60 days
+   Tx (N=1185): median 64 days
+Kidney (N=2095):
+   Dead (N=204): median 496 days
+   Tx (N=1072): median 352 days
+Lung (N=106):
+   Dead (N=59): median 93 days
+   Tx (N=38): median 125 days
+Pancreas (N=29):
+   Dead (N=0)
+   Tx (N=25): median 518 days
+Cornea (N=1163):
+   Loss FU (N=36): median 428 days
+   Tx (N=898): median 133 days
+
+Correlation of PRA and wait_time for all candidates:
+All non-significant except kidney:
+Spearman rho=-0.17, p<0.0001 (N=5389)
+
+Correlation of PRA and wait_time for exited candidates:
+All non-significant except kidney:
+Spearman rho=-0.17, p<0.0001 (N=554)
+
+Correlation of PRA and wait_time for transplanted candidates:
+All non-significant.
+   
